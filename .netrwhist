@@ -1,0 +1,11 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =9
+let g:netrw_dirhist_1='/home/kaushal/src/arch-glusterfs'
+let g:netrw_dirhist_2='/var/abs/extra/wireshark'
+let g:netrw_dirhist_3='/media/Extra/cm9/kernel/samsung/aries/build'
+let g:netrw_dirhist_4='/home/kaushal/.kde4/share/apps/plasma/plasmoids/notifier'
+let g:netrw_dirhist_5='/media/Extra/cm9/kernel/samsung/aries/build'
+let g:netrw_dirhist_6='/home/kaushal/src/glusterfs/api'
+let g:netrw_dirhist_7='/home/kaushal/src/glusterfs/api/examples'
+let g:netrw_dirhist_8='/home/kaushal/src/glusterfs/argp-standalone'
+let g:netrw_dirhist_9='/home/kaushal/.config/fontconfig'

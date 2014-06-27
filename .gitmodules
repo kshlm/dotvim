@@ -1,0 +1,96 @@
+[submodule "bundle/a.vim"]
+	path = bundle/a.vim
+	url = https://github.com/vim-scripts/a.vim.git
+[submodule "bundle/bufexplorer.zip"]
+	path = bundle/bufexplorer.zip
+	url = https://github.com/vim-scripts/bufexplorer.zip.git
+[submodule "bundle/delimitMate"]
+	path = bundle/delimitMate
+	url = https://github.com/Raimondi/delimitMate.git
+[submodule "bundle/DrawIt"]
+	path = bundle/DrawIt
+	url = https://github.com/vim-scripts/DrawIt.git
+[submodule "bundle/neobundle.vim"]
+	path = bundle/neobundle.vim
+	url = https://github.com/Shougo/neobundle.vim.git
+[submodule "bundle/neobundle-vim-recipes"]
+	path = bundle/neobundle-vim-recipes
+	url = https://github.com/Shougo/neobundle-vim-recipes.git
+[submodule "bundle/neomru.vim"]
+	path = bundle/neomru.vim
+	url = https://github.com/Shougo/neomru.vim.git
+[submodule "bundle/nimrod.vim"]
+	path = bundle/nimrod.vim
+	url = https://github.com/zah/nimrod.vim.git
+[submodule "bundle/puppet-syntax-vim"]
+	path = bundle/puppet-syntax-vim
+	url = https://github.com/puppetlabs/puppet-syntax-vim.git
+[submodule "bundle/ropevim-helper"]
+	path = bundle/ropevim-helper
+	url = https://github.com/rygwdn/ropevim-helper.git
+[submodule "bundle/SearchComplete"]
+	path = bundle/SearchComplete
+	url = https://github.com/vim-scripts/SearchComplete.git
+[submodule "bundle/syntastic"]
+	path = bundle/syntastic
+	url = https://github.com/scrooloose/syntastic.git
+[submodule "bundle/tabular"]
+	path = bundle/tabular
+	url = https://github.com/godlygeek/tabular.git
+[submodule "bundle/tagbar"]
+	path = bundle/tagbar
+	url = https://github.com/majutsushi/tagbar.git
+[submodule "bundle/The-NERD-Commenter"]
+	path = bundle/The-NERD-Commenter
+	url = https://github.com/vim-scripts/The-NERD-Commenter.git
+[submodule "bundle/The-NERD-tree"]
+	path = bundle/The-NERD-tree
+	url = https://github.com/vim-scripts/The-NERD-tree.git
+[submodule "bundle/ultisnips"]
+	path = bundle/ultisnips
+	url = https://github.com/SirVer/ultisnips.git
+[submodule "bundle/unite.vim"]
+	path = bundle/unite.vim
+	url = https://github.com/Shougo/unite.vim.git
+[submodule "bundle/vim-airline"]
+	path = bundle/vim-airline
+	url = https://github.com/bling/vim-airline.git
+[submodule "bundle/vim-bufferline"]
+	path = bundle/vim-bufferline
+	url = https://github.com/bling/vim-bufferline.git
+[submodule "bundle/vimclojure-easy"]
+	path = bundle/vimclojure-easy
+	url = https://github.com/daveray/vimclojure-easy.git
+[submodule "bundle/vim-dispatch"]
+	path = bundle/vim-dispatch
+	url = https://github.com/tpope/vim-dispatch.git
+[submodule "bundle/vim-easymotion"]
+	path = bundle/vim-easymotion
+	url = https://github.com/Lokaltog/vim-easymotion.git
+[submodule "bundle/vim-fugitive"]
+	path = bundle/vim-fugitive
+	url = https://github.com/tpope/vim-fugitive.git
+[submodule "bundle/vim-gitgutter"]
+	path = bundle/vim-gitgutter
+	url = https://github.com/airblade/vim-gitgutter.git
+[submodule "bundle/vim-go"]
+	path = bundle/vim-go
+	url = https://github.com/fatih/vim-go.git
+[submodule "bundle/vimproc"]
+	path = bundle/vimproc
+	url = https://github.com/Shougo/vimproc.git
+[submodule "bundle/vimshell.vim"]
+	path = bundle/vimshell.vim
+	url = https://github.com/Shougo/vimshell.vim.git
+[submodule "bundle/vim-surround"]
+	path = bundle/vim-surround
+	url = https://github.com/tpope/vim-surround.git
+[submodule "bundle/vim-trailing-whitespace"]
+	path = bundle/vim-trailing-whitespace
+	url = https://github.com/bronson/vim-trailing-whitespace.git
+[submodule "bundle/vimwiki"]
+	path = bundle/vimwiki
+	url = https://github.com/vim-scripts/vimwiki.git
+[submodule "bundle/YouCompleteMe"]
+	path = bundle/YouCompleteMe
+	url = https://github.com/Valloric/YouCompleteMe.git
