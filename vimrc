@@ -1,0 +1,101 @@
+if has('vim_starting')
+  set nocompatible
+  set rtp+=~/.vim/bundle/neobundle.vim/
+endif
+
+call neobundle#rc(expand('~/.vim/bundle/'))
+
+NeoBundleFetch 'Shougo/neobundle.vim'
+
+NeoBundle 'Shougo/neobundle-vim-recipes'
+NeoBundle 'Shougo/vimproc', {'build': {'unix': 'make'},}
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/vimshell.vim'
+NeoBundle 'Shougo/neomru.vim' " MRU plugin includes unite.vim MRU sources
+"NeoBundle 'Shougo/neocomplete.vim' " Next generation completion framework after neocomplcache
+"NeoBundle 'Shougo/neosnippet.vim' " neo-snippet plugin contains neocomplcache snippets source
+"NeoBundle 'Shougo/neosnippet-snippets' " neo-snippet plugin contains neocomplcache snippets source
+NeoBundle 'Lokaltog/vim-easymotion'
+NeoBundle 'SearchComplete'
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'tpope/vim-surround'
+NeoBundle 'tpope/vim-dispatch'
+NeoBundle 'a.vim'
+NeoBundle 'bufexplorer.zip'
+NeoBundle 'The-NERD-Commenter'
+NeoBundle 'Valloric/YouCompleteMe', {'build': { 'unix': './install.sh --clang-completer --system-libclang'},}
+NeoBundle 'majutsushi/tagbar'
+NeoBundle 'godlygeek/tabular'
+NeoBundle 'scrooloose/syntastic'
+NeoBundle 'airblade/vim-gitgutter'
+NeoBundle 'bling/vim-airline'
+NeoBundle 'bling/vim-bufferline'
+NeoBundle 'bronson/vim-trailing-whitespace' " Highlights trailing whitespace in red and provides :FixWhitespace to fix it.
+NeoBundle 'daveray/vimclojure-easy'
+NeoBundle 'puppetlabs/puppet-syntax-vim'
+NeoBundle 'Raimondi/delimitMate'
+NeoBundle 'SirVer/ultisnips' " 1.0   The ultimate snippet solution for python enabled Vim.
+NeoBundle 'honza/vim-snippets'
+NeoBundle 'zah/nimrod.vim' " 1.0   Nimrod syntax support
+NeoBundle 'fatih/vim-go' " Go development plugin for Vim
+NeoBundleLazy 'DrawIt' " 02242003 Ascii drawing plugin: lines, ellipses, arrows, fills, and more!
+NeoBundleLazy 'rygwdn/ropevim-helper' " simple vim plugin to help load ropevim
+
+if !has('vim_starting')
+  " Call on_source hook when reloading .vimrc.
+  call neobundle#call_hook('on_source')
+endif
+
+set tabstop=2
+set shiftwidth=2
+set expandtab
+set smarttab
+set showcmd
+set rnu
+set nu
+set showmatch
+set incsearch
+set hlsearch
+set ignorecase
+set smartcase
+set autoindent
+set smartindent
+set scrolloff=5
+filetype plugin indent on
+set ruler
+set list
+syntax on
+set ofu=syntaxcomplete#Complete
+set hidden
+
+set laststatus=2   " Always show the statusline
+set encoding=utf-8 " Necessary to show Unicode glyphs
+
+set foldmethod=syntax
+set nofoldenable
+
+colorscheme solarized
+set background=light
+
+set gfn=Fantasque\ Sans\ Mono\ 11
+
+autocmd Filetype c,cpp,cs,java,objc setlocal formatoptions+=c,q,r,t textwidth=80 colorcolumn=81 tabstop=8 shiftwidth=8
+autocmd FileType c,cpp,python NeoBundleSource YouCompleteMe
+autocmd Filetype go setlocal rtp+=$GOROOT/misc/vim
+"autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+"auitocmd Syntax * syn match ExtraWhitespace /\s\+$\| \+\ze\t/
+
+let g:ycm_confirm_extra_conf = 0
+let g:TagmaBufMgrLastWindow = 1
+let g:airline_powerline_fonts=1
+let g:airline_theme='bubblegum'
+
+map <F2> :nohl<CR>
+map <F3> :set paste!<CR>
+
+nnoremap <space>s :Unite -quick-match buffer<CR>
+let g:unite_source_history_yank_enable = 1
+nnoremap <space>y :Unite history/yank<cr>
+nnoremap <C-p> :Unite file_mru buffer file_rec/async:! -start-insert -buffer-name=files<CR>
+
+let g:syntastic_python_checkers = ['flake8']
