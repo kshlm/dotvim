@@ -12,10 +12,8 @@ NeoBundle 'Shougo/vimproc', {'build': {'unix': 'make'},}
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimshell.vim'
 NeoBundle 'Shougo/neomru.vim' " MRU plugin includes unite.vim MRU sources
-"NeoBundle 'Shougo/neocomplete.vim' " Next generation completion framework after neocomplcache
-"NeoBundle 'Shougo/neosnippet.vim' " neo-snippet plugin contains neocomplcache snippets source
-"NeoBundle 'Shougo/neosnippet-snippets' " neo-snippet plugin contains neocomplcache snippets source
 NeoBundle 'Lokaltog/vim-easymotion'
+NeoBundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim'}
 NeoBundle 'SearchComplete'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-surround'
@@ -28,7 +26,6 @@ NeoBundle 'majutsushi/tagbar'
 NeoBundle 'godlygeek/tabular'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'airblade/vim-gitgutter'
-NeoBundle 'bling/vim-airline'
 NeoBundle 'bling/vim-bufferline'
 NeoBundle 'bronson/vim-trailing-whitespace' " Highlights trailing whitespace in red and provides :FixWhitespace to fix it.
 NeoBundle 'daveray/vimclojure-easy'
@@ -82,13 +79,11 @@ set gfn=Fantasque\ Sans\ Mono\ 11
 autocmd Filetype c,cpp,cs,java,objc setlocal formatoptions+=c,q,r,t textwidth=80 colorcolumn=81 tabstop=8 shiftwidth=8
 autocmd FileType c,cpp,python NeoBundleSource YouCompleteMe
 autocmd Filetype go setlocal rtp+=$GOROOT/misc/vim
-"autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
-"auitocmd Syntax * syn match ExtraWhitespace /\s\+$\| \+\ze\t/
 
 let g:ycm_confirm_extra_conf = 0
 let g:TagmaBufMgrLastWindow = 1
-let g:airline_powerline_fonts=1
-let g:airline_theme='bubblegum'
+
+let g:powerline_config_overrides={"common": {"term_truecolor": 1}, "ext":{"vim":{"colorscheme" : "solarizedlight"}}}
 
 map <F2> :nohl<CR>
 map <F3> :set paste!<CR>

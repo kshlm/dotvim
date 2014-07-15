@@ -9,6 +9,7 @@ neobundle-vim-recipes
 neobundle.vim
 neomru.vim
 nimrod.vim
+powerline
 puppet-syntax-vim
 ropevim-helper
 syntastic
@@ -16,13 +17,13 @@ tabular
 tagbar
 ultisnips
 unite.vim
-vim-airline
 vim-bufferline
 vim-dispatch
 vim-easymotion
 vim-fugitive
 vim-gitgutter
 vim-go
+vim-snippets
 vim-surround
 vim-trailing-whitespace
 vimclojure-easy
