@@ -28,7 +28,6 @@ NeoBundle 'scrooloose/syntastic'
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'bling/vim-bufferline'
 NeoBundle 'bronson/vim-trailing-whitespace' " Highlights trailing whitespace in red and provides :FixWhitespace to fix it.
-NeoBundle 'daveray/vimclojure-easy'
 NeoBundle 'puppetlabs/puppet-syntax-vim'
 NeoBundle 'Raimondi/delimitMate'
 NeoBundle 'SirVer/ultisnips' " 1.0   The ultimate snippet solution for python enabled Vim.
@@ -37,6 +36,8 @@ NeoBundle 'zah/nimrod.vim' " 1.0   Nimrod syntax support
 NeoBundle 'fatih/vim-go' " Go development plugin for Vim
 NeoBundleLazy 'DrawIt' " 02242003 Ascii drawing plugin: lines, ellipses, arrows, fills, and more!
 NeoBundleLazy 'rygwdn/ropevim-helper' " simple vim plugin to help load ropevim
+NeoBundle 'kien/rainbow_parentheses.vim' " Better Rainbow Parentheses
+NeoBundle 'chilicuil/vim-sml-coursera' " vim + sml for https://class.coursera.org/proglang-002/class/index
 
 if !has('vim_starting')
   " Call on_source hook when reloading .vimrc.
@@ -79,6 +80,8 @@ set gfn=Fantasque\ Sans\ Mono\ 11
 autocmd Filetype c,cpp,cs,java,objc setlocal formatoptions+=c,q,r,t textwidth=80 colorcolumn=81 tabstop=8 shiftwidth=8
 autocmd FileType c,cpp,python NeoBundleSource YouCompleteMe
 autocmd Filetype go setlocal rtp+=$GOROOT/misc/vim
+
+autocmd BufNewFile,BufRead Vagrantfile set filetype=ruby
 
 let g:ycm_confirm_extra_conf = 0
 let g:TagmaBufMgrLastWindow = 1
