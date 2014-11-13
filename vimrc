@@ -3,7 +3,7 @@ if has('vim_starting')
   set rtp+=~/.vim/bundle/neobundle.vim/
 endif
 
-call neobundle#rc(expand('~/.vim/bundle/'))
+call neobundle#begin(expand('~/.vim/bundle/'))
 
 NeoBundleFetch 'Shougo/neobundle.vim'
 
@@ -38,6 +38,8 @@ NeoBundleLazy 'DrawIt' " 02242003 Ascii drawing plugin: lines, ellipses, arrows,
 NeoBundleLazy 'rygwdn/ropevim-helper' " simple vim plugin to help load ropevim
 NeoBundle 'kien/rainbow_parentheses.vim' " Better Rainbow Parentheses
 NeoBundle 'chilicuil/vim-sml-coursera' " vim + sml for https://class.coursera.org/proglang-002/class/index
+
+call neobundle#end()
 
 if !has('vim_starting')
   " Call on_source hook when reloading .vimrc.
@@ -97,3 +99,5 @@ nnoremap <space>y :Unite history/yank<cr>
 nnoremap <C-p> :Unite file_mru buffer file_rec/async:! -start-insert -buffer-name=files<CR>
 
 let g:syntastic_python_checkers = ['flake8']
+
+NeoBundleCheck
