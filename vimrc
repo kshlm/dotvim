@@ -38,6 +38,7 @@ NeoBundleLazy 'DrawIt' " 02242003 Ascii drawing plugin: lines, ellipses, arrows,
 NeoBundleLazy 'rygwdn/ropevim-helper' " simple vim plugin to help load ropevim
 NeoBundle 'kien/rainbow_parentheses.vim' " Better Rainbow Parentheses
 NeoBundle 'chilicuil/vim-sml-coursera' " vim + sml for https://class.coursera.org/proglang-002/class/index
+NeoBundle 'chase/vim-ansible-yaml' " Add additional support for Ansible in VIM
 
 call neobundle#end()
 

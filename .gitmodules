@@ -106,3 +106,6 @@
 [submodule "bundle/vim-sml-coursera"]
 	path = bundle/vim-sml-coursera
 	url = https://github.com/chilicuil/vim-sml-coursera.git
+[submodule "bundle/vim-ansible-yaml"]
+	path = bundle/vim-ansible-yaml
+	url = https://github.com/chase/vim-ansible-yaml.git
