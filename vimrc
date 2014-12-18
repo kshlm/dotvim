@@ -39,6 +39,7 @@ NeoBundleLazy 'rygwdn/ropevim-helper' " simple vim plugin to help load ropevim
 NeoBundle 'kien/rainbow_parentheses.vim' " Better Rainbow Parentheses
 NeoBundle 'chilicuil/vim-sml-coursera' " vim + sml for https://class.coursera.org/proglang-002/class/index
 NeoBundle 'chase/vim-ansible-yaml' " Add additional support for Ansible in VIM
+NeoBundle 'saltstack/salt-vim' " Vim files for editing Salt files
 
 call neobundle#end()
 
