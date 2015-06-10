@@ -40,6 +40,7 @@ NeoBundle 'kien/rainbow_parentheses.vim' " Better Rainbow Parentheses
 NeoBundle 'chilicuil/vim-sml-coursera' " vim + sml for https://class.coursera.org/proglang-002/class/index
 NeoBundle 'chase/vim-ansible-yaml' " Add additional support for Ansible in VIM
 NeoBundle 'saltstack/salt-vim' " Vim files for editing Salt files
+NeoBundle 'jobbler/asciidoc-environment' " Environment to make writing in asciidoc easier
 
 call neobundle#end()
 
@@ -48,6 +49,8 @@ if !has('vim_starting')
   call neobundle#call_hook('on_source')
 endif
 
+set term=konsole-256color-italic
+set t_Co=256
 set tabstop=2
 set shiftwidth=2
 set expandtab
@@ -76,19 +79,12 @@ set encoding=utf-8 " Necessary to show Unicode glyphs
 set foldmethod=syntax
 set nofoldenable
 
-colorscheme solarized
-set background=light
-
 set gfn=Fantasque\ Sans\ Mono\ 11
 
-autocmd Filetype c,cpp,cs,java,objc setlocal formatoptions+=c,q,r,t textwidth=80 colorcolumn=81 tabstop=8 shiftwidth=8
-autocmd FileType c,cpp,python NeoBundleSource YouCompleteMe
+autocmd Filetype c,cpp,cs,java,objc setlocal formatoptions+=cqrtnj textwidth=80 colorcolumn=81 tabstop=8 shiftwidth=8
 autocmd Filetype go setlocal rtp+=$GOROOT/misc/vim
 
 autocmd BufNewFile,BufRead Vagrantfile set filetype=ruby
-
-let g:ycm_confirm_extra_conf = 0
-let g:TagmaBufMgrLastWindow = 1
 
 let g:powerline_config_overrides={"common": {"term_truecolor": 1}, "ext":{"vim":{"colorscheme" : "solarizedlight"}}}
 
@@ -101,5 +97,17 @@ nnoremap <space>y :Unite history/yank<cr>
 nnoremap <C-p> :Unite file_mru buffer file_rec/async:! -start-insert -buffer-name=files<CR>
 
 let g:syntastic_python_checkers = ['flake8']
+
+let g:solarized_bold=1
+let g:solarized_italic=1
+let g:solarized_underline=1
+colorscheme solarized
+set background=light
+hi! Comment cterm=italic
+
+let g:ycm_key_invoke_completion = '<C-b>'
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_confirm_extra_conf = 0
 
 NeoBundleCheck
