@@ -20,7 +20,7 @@ NeoBundle 'tpope/vim-dispatch'
 NeoBundle 'a.vim'
 NeoBundle 'bufexplorer.zip'
 NeoBundle 'The-NERD-Commenter'
-NeoBundle 'Valloric/YouCompleteMe', {'build': { 'unix': './install.sh --clang-completer'},}
+NeoBundle 'Valloric/YouCompleteMe', {'build': { 'unix': './install.sh --clang-completer --gocode-completer'},}
 NeoBundle 'majutsushi/tagbar'
 NeoBundle 'godlygeek/tabular'
 NeoBundle 'scrooloose/syntastic'
