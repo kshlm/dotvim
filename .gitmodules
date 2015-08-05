@@ -112,3 +112,6 @@
 [submodule "bundle/salt-vim"]
 	path = bundle/salt-vim
 	url = https://github.com/saltstack/salt-vim.git
+[submodule "bundle/cscope_maps.vim"]
+	path = bundle/cscope_maps.vim
+	url = https://github.com/etaf/cscope_maps.vim.git
