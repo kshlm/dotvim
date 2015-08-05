@@ -10,7 +10,6 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/neobundle-vim-recipes'
 NeoBundle 'Shougo/vimproc', {'build': {'unix': 'make'},}
 NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/vimshell.vim'
 NeoBundle 'Shougo/neomru.vim' " MRU plugin includes unite.vim MRU sources
 NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'bling/vim-airline'
@@ -21,7 +20,7 @@ NeoBundle 'tpope/vim-dispatch'
 NeoBundle 'a.vim'
 NeoBundle 'bufexplorer.zip'
 NeoBundle 'The-NERD-Commenter'
-NeoBundle 'Valloric/YouCompleteMe', {'build': { 'unix': './install.sh --clang-completer --system-libclang'},}
+NeoBundle 'Valloric/YouCompleteMe', {'build': { 'unix': './install.sh --clang-completer'},}
 NeoBundle 'majutsushi/tagbar'
 NeoBundle 'godlygeek/tabular'
 NeoBundle 'scrooloose/syntastic'
