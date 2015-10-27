@@ -99,6 +99,7 @@ nnoremap <space>y :Unite history/yank<cr>
 nnoremap <C-p> :Unite file_mru buffer file_rec/async:! -start-insert -buffer-name=files<CR>
 
 let g:syntastic_python_checkers = ['flake8']
+let g:syntastic_go_checkers = ['govet', 'golint']
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
