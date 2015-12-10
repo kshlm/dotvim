@@ -30,8 +30,6 @@ Plug 'SirVer/ultisnips' " 1.0   The ultimate snippet solution for python enabled
 Plug 'honza/vim-snippets'
 Plug 'zah/nimrod.vim' " 1.0   Nimrod syntax support
 Plug 'fatih/vim-go' " Go development plugin for Vim
-"NeoBundleLazy 'DrawIt' " 02242003 Ascii drawing plugin: lines, ellipses, arrows, fills, and more!
-"NeoBundleLazy 'rygwdn/ropevim-helper' " simple vim plugin to help load ropevim
 Plug 'kien/rainbow_parentheses.vim' " Better Rainbow Parentheses
 Plug 'chilicuil/vim-sml-coursera' " vim + sml for https://class.coursera.org/proglang-002/class/index
 Plug 'chase/vim-ansible-yaml' " Add additional support for Ansible in VIM
