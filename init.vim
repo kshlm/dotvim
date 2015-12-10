@@ -4,8 +4,7 @@ endif
 
 call plug#begin('~/.config/nvim/bundle')
 
-Plug 'Shougo/neobundle-vim-recipes'
-Plug 'Shougo/vimproc', {'build': {'unix': 'make'},}
+Plug 'Shougo/vimproc', {'do':  'make'}
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/neomru.vim' " MRU plugin includes unite.vim MRU sources
 Plug 'Lokaltog/vim-easymotion'
@@ -17,7 +16,7 @@ Plug 'tpope/vim-dispatch'
 Plug 'a.vim'
 Plug 'bufexplorer.zip'
 Plug 'The-NERD-Commenter'
-Plug 'Valloric/YouCompleteMe', {'build': { 'unix': './install.sh --clang-completer --gocode-completer'},}
+Plug 'Valloric/YouCompleteMe', { 'for': ['python','c', 'go'], 'do': './install.sh --clang-completer --gocode-completer'}
 Plug 'majutsushi/tagbar'
 Plug 'godlygeek/tabular'
 Plug 'scrooloose/syntastic'
@@ -29,8 +28,8 @@ Plug 'Raimondi/delimitMate'
 Plug 'SirVer/ultisnips' " 1.0   The ultimate snippet solution for python enabled Vim.
 Plug 'honza/vim-snippets'
 Plug 'zah/nimrod.vim' " 1.0   Nimrod syntax support
-Plug 'fatih/vim-go' " Go development plugin for Vim
-Plug 'kien/rainbow_parentheses.vim' " Better Rainbow Parentheses
+Plug 'fatih/vim-go', {'for': ['go']} " Go development plugin for Vim
+Plug 'kien/rainbow_parentheses.vim', {'for': ['clojure','lisp', 'scheme', 'racket']} " Better Rainbow Parentheses
 Plug 'chilicuil/vim-sml-coursera' " vim + sml for https://class.coursera.org/proglang-002/class/index
 Plug 'chase/vim-ansible-yaml' " Add additional support for Ansible in VIM
 Plug 'saltstack/salt-vim' " Vim files for editing Salt files
