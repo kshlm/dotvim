@@ -9,6 +9,7 @@ Plug 'Shougo/unite.vim'
 Plug 'Shougo/neomru.vim' " MRU plugin includes unite.vim MRU sources
 Plug 'Lokaltog/vim-easymotion'
 Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'SearchComplete'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
@@ -36,6 +37,7 @@ Plug 'saltstack/salt-vim' " Vim files for editing Salt files
 Plug 'etaf/cscope_maps.vim' " a mirror of http://cscope.sourceforge.net/cscope_maps.vim
 Plug 'fhenrysson/vim-protobuf' " Syntax highlighting of Google protobuf
 Plug 'jigish/vim-thrift' " Thrift Syntax
+Plug 'elixir-lang/vim-elixir'
 
 call plug#end()
 
