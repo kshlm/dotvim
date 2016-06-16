@@ -8,7 +8,7 @@ Plug 'Shougo/vimproc', {'do':  'make'}
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/neomru.vim' " MRU plugin includes unite.vim MRU sources
 Plug 'Lokaltog/vim-easymotion'
-Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'SearchComplete'
 Plug 'tpope/vim-fugitive'
@@ -17,19 +17,16 @@ Plug 'tpope/vim-dispatch'
 Plug 'a.vim'
 Plug 'bufexplorer.zip'
 Plug 'The-NERD-Commenter'
-Plug 'Valloric/YouCompleteMe', { 'for': ['python','c', 'go'], 'do': './install.sh --clang-completer --gocode-completer'}
+Plug 'Valloric/YouCompleteMe', { 'for': ['python','c'], 'do': './install.sh --clang-completer --gocode-completer'}
 Plug 'majutsushi/tagbar'
 Plug 'godlygeek/tabular'
 Plug 'scrooloose/syntastic'
-Plug 'airblade/vim-gitgutter'
+Plug 'mhinz/vim-signify'
 Plug 'bling/vim-bufferline'
 Plug 'bronson/vim-trailing-whitespace' " Highlights trailing whitespace in red and provides :FixWhitespace to fix it.
 Plug 'puppetlabs/puppet-syntax-vim'
 Plug 'Raimondi/delimitMate'
-Plug 'SirVer/ultisnips' " 1.0   The ultimate snippet solution for python enabled Vim.
-Plug 'honza/vim-snippets'
 Plug 'zah/nimrod.vim' " 1.0   Nimrod syntax support
-Plug 'fatih/vim-go', {'for': ['go']} " Go development plugin for Vim
 Plug 'kien/rainbow_parentheses.vim', {'for': ['clojure','lisp', 'scheme', 'racket']} " Better Rainbow Parentheses
 Plug 'chilicuil/vim-sml-coursera' " vim + sml for https://class.coursera.org/proglang-002/class/index
 Plug 'chase/vim-ansible-yaml' " Add additional support for Ansible in VIM
@@ -38,6 +35,11 @@ Plug 'etaf/cscope_maps.vim' " a mirror of http://cscope.sourceforge.net/cscope_m
 Plug 'fhenrysson/vim-protobuf' " Syntax highlighting of Google protobuf
 Plug 'jigish/vim-thrift' " Thrift Syntax
 Plug 'elixir-lang/vim-elixir'
+Plug 'altercation/vim-colors-solarized'
+"Go plugins
+Plug 'fatih/vim-go', {'for': ['go']} " Go development plugin for Vim
+Plug 'Shougo/deoplete.nvim', {'for': ['go']}
+Plug 'zchee/deoplete-go', {'for': ['go'], 'do': 'make'}
 
 call plug#end()
 
@@ -79,9 +81,6 @@ autocmd Filetype c,cpp,cs,java,objc setlocal formatoptions+=cqrtnj textwidth=80 
 autocmd BufNewFile,BufRead Vagrantfile set filetype=ruby
 
 
-let g:powerline_config_overrides={"common": {"term_truecolor": 1}, "ext":{"vim":{"colorscheme" : "solarizedlight"}}}
-let g:powerline_pycmd = "py3"
-
 map <F2> :nohl<CR>
 map <F3> :set paste!<CR>
 
@@ -90,24 +89,20 @@ let g:unite_source_history_yank_enable = 1
 nnoremap <space>y :Unite history/yank<cr>
 nnoremap <C-p> :Unite file_mru buffer file_rec/async:! -start-insert -buffer-name=files<CR>
 
+"Syntastic configuration
 let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_go_checkers = ['govet', 'golint']
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go']}
 
 let g:ycm_key_invoke_completion = '<C-b>'
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_confirm_extra_conf = 0
-
-let g:airline_powerline_fonts = 1
-let g:airline_theme = 'zenburn'
 
 tnoremap <Esc> <c-\><c-n>
 
@@ -132,8 +127,9 @@ let g:solarized_bold=1
 let g:solarized_italic=1
 let g:solarized_underline=1
 hi! Comment cterm=italic
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-"set background=light
-colorscheme zenburn
 
-"NeoBundleCheck
+colorscheme solarized
+set bg=light
+
+"let g:airline_powerline_fonts = 1
+let g:airline_theme = 'base16_solarized'
