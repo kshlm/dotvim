@@ -4,42 +4,47 @@ endif
 
 call plug#begin('~/.config/nvim/bundle')
 
+Plug 'junegunn/fzf', {'do': './install --bin'} | Plug 'junegunn/fzf.vim'
+Plug 'Lokaltog/vim-easymotion'
 Plug 'Shougo/vimproc', {'do':  'make'}
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/neomru.vim' " MRU plugin includes unite.vim MRU sources
-Plug 'Lokaltog/vim-easymotion'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'SearchComplete'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-repeat'
 Plug 'a.vim'
 Plug 'bufexplorer.zip'
 Plug 'The-NERD-Commenter'
-Plug 'Valloric/YouCompleteMe', { 'for': ['python','c'], 'do': './install.sh --clang-completer --gocode-completer'}
+Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer --gocode-completer --racer-completer'}
 Plug 'majutsushi/tagbar'
 Plug 'godlygeek/tabular'
 Plug 'scrooloose/syntastic'
+Plug 'scrooloose/nerdtree'
 Plug 'mhinz/vim-signify'
 Plug 'bling/vim-bufferline'
 Plug 'bronson/vim-trailing-whitespace' " Highlights trailing whitespace in red and provides :FixWhitespace to fix it.
 Plug 'puppetlabs/puppet-syntax-vim'
 Plug 'Raimondi/delimitMate'
-Plug 'zah/nimrod.vim' " 1.0   Nimrod syntax support
+Plug 'zah/nimrod.vim', {'for': 'nim'} " 1.0   Nimrod syntax support
 Plug 'kien/rainbow_parentheses.vim', {'for': ['clojure','lisp', 'scheme', 'racket']} " Better Rainbow Parentheses
-Plug 'chilicuil/vim-sml-coursera' " vim + sml for https://class.coursera.org/proglang-002/class/index
-Plug 'chase/vim-ansible-yaml' " Add additional support for Ansible in VIM
-Plug 'saltstack/salt-vim' " Vim files for editing Salt files
-Plug 'etaf/cscope_maps.vim' " a mirror of http://cscope.sourceforge.net/cscope_maps.vim
+Plug 'chilicuil/vim-sml-coursera', {'for': 'sml'} " vim + sml for https://class.coursera.org/proglang-002/class/index
+Plug 'chase/vim-ansible-yaml', {'for': 'ansible'} " Add additional support for Ansible in VIM
+Plug 'saltstack/salt-vim', {'for': 'salt'} " Vim files for editing Salt files
+Plug 'etaf/cscope_maps.vim', { 'for' : ['c']} " a mirror of http://cscope.sourceforge.net/cscope_maps.vim
 Plug 'fhenrysson/vim-protobuf' " Syntax highlighting of Google protobuf
 Plug 'jigish/vim-thrift' " Thrift Syntax
-Plug 'elixir-lang/vim-elixir'
+Plug 'elixir-lang/vim-elixir', {'for': 'elixir'}
+Plug 'slashmili/alchemist.vim', {'for': 'elixir'}
 Plug 'altercation/vim-colors-solarized'
-"Go plugins
-Plug 'fatih/vim-go', {'for': ['go']} " Go development plugin for Vim
-Plug 'Shougo/deoplete.nvim', {'for': ['go']}
-Plug 'zchee/deoplete-go', {'for': ['go'], 'do': 'make'}
+Plug 'diepm/vim-rest-console'
+Plug 'cespare/vim-toml'
+Plug 'fatih/vim-go', {'for': ['go'], 'tag': 'v1.10'} " Go development plugin for Vim
+Plug 'mhinz/vim-startify'
+Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
@@ -67,32 +72,29 @@ syntax on
 set ofu=syntaxcomplete#Complete
 set hidden
 
-set laststatus=2   " Always show the statusline
-set encoding=utf-8 " Necessary to show Unicode glyphs
-
 set foldmethod=syntax
 set nofoldenable
 
 set gfn=Fantasque\ Sans\ Mono\ 11
 
 autocmd Filetype c,cpp,cs,java,objc setlocal formatoptions+=cqrtnj textwidth=80 colorcolumn=81 tabstop=8 shiftwidth=8
-"autocmd Filetype go setlocal rtp+=$GOROOT/misc/vim
 
 autocmd BufNewFile,BufRead Vagrantfile set filetype=ruby
+autocmd BufNewFile,BufRead *.xlator set filetype=toml
 
 
 map <F2> :nohl<CR>
 map <F3> :set paste!<CR>
 
-nnoremap <space>s :Unite -quick-match buffer<CR>
-let g:unite_source_history_yank_enable = 1
-nnoremap <space>y :Unite history/yank<cr>
-nnoremap <C-p> :Unite file_mru buffer file_rec/async:! -start-insert -buffer-name=files<CR>
+"FZF Ctrl-P
+nmap <C-P> :FZF<enter>
+nmap <C-B> :Buffers<enter>
+
 
 "Syntastic configuration
 let g:syntastic_python_checkers = ['flake8']
-let g:syntastic_go_checkers = ['govet', 'golint']
-
+"let g:syntastic_go_checkers = ['gometalinter', 'golint', 'govet', 'errcheck']
+let g:syntastic_go_checkers = ['gometalinter']
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
@@ -104,32 +106,17 @@ let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_confirm_extra_conf = 0
 
-tnoremap <Esc> <c-\><c-n>
+"Vim-Go configuration
+let g:go_list_type = "quickfix"
 
-" s: Find this C symbol
-nnoremap  <leader>fs :call CscopeFind('s', expand('<cword>'))<CR>
-" g: Find this definition
-nnoremap  <leader>fg :call CscopeFind('g', expand('<cword>'))<CR>
-" d: Find functions called by this function
-nnoremap  <leader>fd :call CscopeFind('d', expand('<cword>'))<CR>
-" c: Find functions calling this function
-nnoremap  <leader>fc :call CscopeFind('c', expand('<cword>'))<CR>
-" t: Find this text string
-nnoremap  <leader>ft :call CscopeFind('t', expand('<cword>'))<CR>
-" e: Find this egrep pattern
-nnoremap  <leader>fe :call CscopeFind('e', expand('<cword>'))<CR>
-" f: Find this file
-nnoremap  <leader>ff :call CscopeFind('f', expand('<cword>'))<CR>
-" i: Find files #including this file
-nnoremap  <leader>fi :call CscopeFind('i', expand('<cword>'))<CR>
+tnoremap <Esc> <c-\><c-n>
 
 let g:solarized_bold=1
 let g:solarized_italic=1
 let g:solarized_underline=1
-hi! Comment cterm=italic
 
 colorscheme solarized
-set bg=light
+set bg=dark
 
-"let g:airline_powerline_fonts = 1
+let g:airline_powerline_fonts = 1
 let g:airline_theme = 'base16_solarized'
