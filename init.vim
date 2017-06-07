@@ -6,20 +6,17 @@ call plug#begin('~/.config/nvim/bundle')
 
 Plug 'junegunn/fzf', {'do': './install --bin'} | Plug 'junegunn/fzf.vim'
 Plug 'Lokaltog/vim-easymotion'
-Plug 'Shougo/vimproc', {'do':  'make'}
-Plug 'Shougo/unite.vim'
-Plug 'Shougo/neomru.vim' " MRU plugin includes unite.vim MRU sources
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'SearchComplete'
+Plug 'altercation/vim-colors-solarized'
+Plug 'vim-scripts/SearchComplete'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-repeat'
-Plug 'a.vim'
-Plug 'bufexplorer.zip'
-Plug 'The-NERD-Commenter'
-Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer --gocode-completer --racer-completer'}
+Plug 'vim-scripts/a.vim'
+Plug 'vim-scripts/bufexplorer.zip'
+Plug 'vim-scripts/The-NERD-Commenter'
 Plug 'majutsushi/tagbar'
 Plug 'godlygeek/tabular'
 Plug 'scrooloose/syntastic'
@@ -39,12 +36,18 @@ Plug 'fhenrysson/vim-protobuf' " Syntax highlighting of Google protobuf
 Plug 'jigish/vim-thrift' " Thrift Syntax
 Plug 'elixir-lang/vim-elixir', {'for': 'elixir'}
 Plug 'slashmili/alchemist.vim', {'for': 'elixir'}
-Plug 'altercation/vim-colors-solarized'
 Plug 'diepm/vim-rest-console'
 Plug 'cespare/vim-toml'
-Plug 'fatih/vim-go', {'for': ['go'], 'tag': 'v1.10'} " Go development plugin for Vim
+Plug 'fatih/vim-go', {'for': ['go'], 'tag': 'v1.12'} " Go development plugin for Vim
 Plug 'mhinz/vim-startify'
 Plug 'ryanoasis/vim-devicons'
+
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'tweekmonster/deoplete-clang2'
+Plug 'zchee/deoplete-go', { 'do': 'make'}
+Plug 'zchee/deoplete-jedi'
+
+Plug 'fneu/breezy'
 
 call plug#end()
 
@@ -90,6 +93,7 @@ map <F3> :set paste!<CR>
 nmap <C-P> :FZF<enter>
 nmap <C-B> :Buffers<enter>
 
+let g:deoplete#enable_at_startup = 1
 
 "Syntastic configuration
 let g:syntastic_python_checkers = ['flake8']
@@ -101,22 +105,13 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go']}
 
-let g:ycm_key_invoke_completion = '<C-b>'
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_confirm_extra_conf = 0
-
 "Vim-Go configuration
 let g:go_list_type = "quickfix"
 
 tnoremap <Esc> <c-\><c-n>
 
-let g:solarized_bold=1
-let g:solarized_italic=1
-let g:solarized_underline=1
-
+set background=dark
+"set termguicolors " if you want to run vim in a terminal
 colorscheme solarized
-set bg=dark
-
 let g:airline_powerline_fonts = 1
-let g:airline_theme = 'base16_solarized'
+let g:airline_theme = 'solarized'
