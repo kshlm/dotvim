@@ -1,57 +1,82 @@
-if has('vim_starting')
+if &compatible 
   set nocompatible
 endif
 
-call plug#begin('~/.config/nvim/bundle')
+set runtimepath+=/home/kaushal/.config/nvim/bundle/repos/github.com/Shougo/dein.vim
 
-Plug 'junegunn/fzf', {'do': './install --bin'} | Plug 'junegunn/fzf.vim'
-Plug 'Lokaltog/vim-easymotion'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'altercation/vim-colors-solarized'
-Plug 'vim-scripts/SearchComplete'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-dispatch'
-Plug 'tpope/vim-repeat'
-Plug 'vim-scripts/a.vim'
-Plug 'vim-scripts/bufexplorer.zip'
-Plug 'vim-scripts/The-NERD-Commenter'
-Plug 'majutsushi/tagbar'
-Plug 'godlygeek/tabular'
-Plug 'scrooloose/syntastic'
-Plug 'scrooloose/nerdtree'
-Plug 'mhinz/vim-signify'
-Plug 'bling/vim-bufferline'
-Plug 'bronson/vim-trailing-whitespace' " Highlights trailing whitespace in red and provides :FixWhitespace to fix it.
-Plug 'puppetlabs/puppet-syntax-vim'
-Plug 'Raimondi/delimitMate'
-Plug 'zah/nimrod.vim', {'for': 'nim'} " 1.0   Nimrod syntax support
-Plug 'kien/rainbow_parentheses.vim', {'for': ['clojure','lisp', 'scheme', 'racket']} " Better Rainbow Parentheses
-Plug 'chilicuil/vim-sml-coursera', {'for': 'sml'} " vim + sml for https://class.coursera.org/proglang-002/class/index
-Plug 'chase/vim-ansible-yaml', {'for': 'ansible'} " Add additional support for Ansible in VIM
-Plug 'saltstack/salt-vim', {'for': 'salt'} " Vim files for editing Salt files
-Plug 'etaf/cscope_maps.vim', { 'for' : ['c']} " a mirror of http://cscope.sourceforge.net/cscope_maps.vim
-Plug 'fhenrysson/vim-protobuf' " Syntax highlighting of Google protobuf
-Plug 'jigish/vim-thrift' " Thrift Syntax
-Plug 'elixir-lang/vim-elixir', {'for': 'elixir'}
-Plug 'slashmili/alchemist.vim', {'for': 'elixir'}
-Plug 'diepm/vim-rest-console'
-Plug 'cespare/vim-toml'
-Plug 'fatih/vim-go', {'for': ['go'], 'tag': 'v1.12'} " Go development plugin for Vim
-Plug 'mhinz/vim-startify'
-Plug 'ryanoasis/vim-devicons'
+if dein#load_state('/home/kaushal/.config/nvim/bundle')
+  call dein#begin('/home/kaushal/.config/nvim/bundle')
 
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'zchee/deoplete-clang'
-"Plug 'tweekmonster/deoplete-clang2'
-Plug 'zchee/deoplete-go', { 'do': 'make'}
-Plug 'zchee/deoplete-jedi'
+  "Shougo's plugins
+  call dein#add('/home/kaushal/.config/nvim/bundle/repos/github.com/Shougo/dein.vim')
+  call dein#add('Shougo/deoplete.nvim')
+  call dein#add('Shougo/deol.nvim')
+  call dein#add('Shougo/denite.nvim')
 
-Plug 'kassio/neoterm'
+  "UI and Visual plugins
+  call dein#add('altercation/vim-colors-solarized')
+  call dein#add('bling/vim-bufferline')
+  call dein#add('majutsushi/tagbar')
+  call dein#add('mhinz/vim-signify')
+  call dein#add('mhinz/vim-startify')
+  call dein#add('ryanoasis/vim-devicons')
+  call dein#add('scrooloose/nerdtree')
+  call dein#add('vim-airline/vim-airline')
+  call dein#add('vim-airline/vim-airline-themes')
+  call dein#add('vim-scripts/bufexplorer.zip')
 
-call plug#end()
+  "Utility plugins
+  call dein#add('Lokaltog/vim-easymotion')
+  call dein#add('bronson/vim-trailing-whitespace')
+  call dein#add('godlygeek/tabular')
+  call dein#add('tpope/vim-dispatch')
+  call dein#add('tpope/vim-fugitive')
+  call dein#add('tpope/vim-repeat')
+  call dein#add('tpope/vim-surround')
+  call dein#add('vim-scripts/SearchComplete')
+  call dein#add('vim-scripts/The-NERD-Commenter')
+  call dein#add('vim-scripts/a.vim')
 
+  "General dev plugins
+  call dein#add('Raimondi/delimitMate')
+  call dein#add('diepm/vim-rest-console')
+  call dein#add('scrooloose/syntastic')
+
+  "Go plugins
+  call dein#add('fatih/vim-go', {'on_ft': ['go'], 'rev': 'v1.15'})
+  call dein#add('zchee/deoplete-go', { 'build': 'make'})
+
+  "C plugins
+  call dein#add('etaf/cscope_maps.vim', { 'on_ft' : ['c']})
+  call dein#add('zchee/deoplete-clang')
+  "call dein#add('tweekmonster/deoplete-clang2')
+
+  "Python plugins
+  call dein#add('zchee/deoplete-jedi')
+
+  "Elixir plugins
+  call dein#add('elixir-lang/vim-elixir', {'on_ft': 'elixir'})
+  call dein#add('slashmili/alchemist.vim', {'on_ft': 'elixir'})
+
+  "Lisp plugins
+  call dein#add('kien/rainbow_parentheses.vim', {'on_ft': ['clojure','lisp', 'scheme', 'racket']})
+
+  "Misc language and filetypes
+  call dein#add('cespare/vim-toml')
+  call dein#add('chase/vim-ansible-yaml', {'on_ft': 'ansible'})
+  call dein#add('chilicuil/vim-sml-coursera', {'on_ft': 'sml'})
+  call dein#add('fhenrysson/vim-protobuf')
+  call dein#add('jigish/vim-thrift')
+  call dein#add('puppetlabs/puppet-syntax-vim')
+  call dein#add('saltstack/salt-vim', {'on_ft': 'salt'})
+  call dein#add('zah/nimrod.vim', {'on_ft': 'nim'})
+
+
+  call dein#end()
+  call dein#save_state()
+endif
+
+"General settings
 set nobackup
 set mouse=
 set tabstop=2
@@ -79,21 +104,36 @@ set hidden
 set foldmethod=syntax
 set nofoldenable
 
-set gfn=Fantasque\ Sans\ Mono\ 11
-
-autocmd Filetype c,cpp,cs,java,objc setlocal formatoptions+=cqrtnj textwidth=80 colorcolumn=81 tabstop=8 shiftwidth=8
-
-autocmd BufNewFile,BufRead Vagrantfile set filetype=ruby
-autocmd BufNewFile,BufRead *.xlator set filetype=toml
-
-
 map <F2> :nohl<CR>
 map <F3> :set paste!<CR>
 
-"FZF Ctrl-P
-nmap <C-P> :FZF<enter>
-nmap <C-B> :Buffers<enter>
+"Gui settings
+set gfn=Fantasque\ Sans\ Mono\ 11
 
+"C settings
+autocmd Filetype c,cpp,cs,java,objc setlocal formatoptions+=cqrtnj textwidth=80 colorcolumn=81 tabstop=8 shiftwidth=8
+
+"Vim-Go configuration
+let g:go_list_type = "quickfix"
+
+"Misc filetype settings
+autocmd BufNewFile,BufRead Vagrantfile set filetype=ruby
+autocmd BufNewFile,BufRead *.xlator set filetype=toml
+
+"Denite settings
+nmap <C-P> :Denite file_rec<Enter>
+nmap <C-B> :Denite buffer<Enter>
+if executable('rg')
+  call denite#custom#var('file_rec', 'command', ['rg', '--files', '--glob', '!.git', ''])
+  call denite#custom#var('grep', 'command', ['ack'])
+  call denite#custom#var('grep', 'default_opts', ['--ackrc', $HOME.'/.ackrc', '-H', '--nopager', '--nocolor', '--nogroup', '--column'])
+  call denite#custom#var('grep', 'recursive_opts', [])
+  call denite#custom#var('grep', 'pattern_opt', ['--match'])
+  call denite#custom#var('grep', 'separator', ['--'])
+  call denite#custom#var('grep', 'final_opts', [])
+endif
+
+"Deoplete settings
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so'
 let g:deoplete#sources#clang#clang_header = '/usr/lib/clang'
@@ -110,11 +150,7 @@ let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_mode_map = { 'mode': 'active'}
 
-"Vim-Go configuration
-let g:go_list_type = "quickfix"
-
-tnoremap <Esc> <c-\><c-n>
-
+"UI settings at the end
 set background=dark
 "set termguicolors " if you want to run vim in a terminal
 colorscheme solarized
