@@ -24,11 +24,14 @@ if dein#load_state('/home/kaushal/.config/nvim/bundle')
   call dein#add('vim-airline/vim-airline')
   call dein#add('vim-airline/vim-airline-themes')
   call dein#add('vim-scripts/bufexplorer.zip')
+  call dein#add('metakirby5/codi.vim')
 
   "Utility plugins
-  call dein#add('Lokaltog/vim-easymotion')
+  "call dein#add('Lokaltog/vim-easymotion')
   call dein#add('bronson/vim-trailing-whitespace')
+  call dein#add('editorconfig/editorconfig-vim')
   call dein#add('godlygeek/tabular')
+  call dein#add('justinmk/vim-sneak')
   call dein#add('tpope/vim-dispatch')
   call dein#add('tpope/vim-fugitive')
   call dein#add('tpope/vim-repeat')
@@ -62,15 +65,15 @@ if dein#load_state('/home/kaushal/.config/nvim/bundle')
   call dein#add('kien/rainbow_parentheses.vim', {'on_ft': ['clojure','lisp', 'scheme', 'racket']})
 
   "Misc language and filetypes
-  call dein#add('cespare/vim-toml')
-  call dein#add('chase/vim-ansible-yaml', {'on_ft': 'ansible'})
-  call dein#add('chilicuil/vim-sml-coursera', {'on_ft': 'sml'})
-  call dein#add('fhenrysson/vim-protobuf')
-  call dein#add('jigish/vim-thrift')
-  call dein#add('puppetlabs/puppet-syntax-vim')
-  call dein#add('saltstack/salt-vim', {'on_ft': 'salt'})
-  call dein#add('zah/nimrod.vim', {'on_ft': 'nim'})
-
+  call dein#add('sheerun/vim-polyglot')
+  "call dein#add('cespare/vim-toml')
+  "call dein#add('chase/vim-ansible-yaml', {'on_ft': 'ansible'})
+  "call dein#add('chilicuil/vim-sml-coursera', {'on_ft': 'sml'})
+  "call dein#add('fhenrysson/vim-protobuf')
+  "call dein#add('jigish/vim-thrift')
+  "call dein#add('puppetlabs/puppet-syntax-vim')
+  "call dein#add('saltstack/salt-vim', {'on_ft': 'salt'})
+  "call dein#add('zah/nimrod.vim', {'on_ft': 'nim'})
 
   call dein#end()
   call dein#save_state()
@@ -131,6 +134,9 @@ if executable('rg')
   call denite#custom#var('grep', 'pattern_opt', ['--match'])
   call denite#custom#var('grep', 'separator', ['--'])
   call denite#custom#var('grep', 'final_opts', [])
+  "Extra rg settings
+  set grepprg=rg\ --vimgrep
+  set grepformat^=%f:%l:%c:%m
 endif
 
 "Deoplete settings
@@ -149,6 +155,11 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_mode_map = { 'mode': 'active'}
+
+"Vim-sneak settings
+let g:sneak#label = 1
+let g:sneak#use_ic_scs = 0
+autocmd ColorScheme * hi SneakLabel guifg=black guibg=red ctermfg=black ctermbg=red
 
 "UI settings at the end
 set background=dark
