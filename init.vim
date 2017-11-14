@@ -43,11 +43,12 @@ Plug 'mhinz/vim-startify'
 Plug 'ryanoasis/vim-devicons'
 
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'tweekmonster/deoplete-clang2'
+Plug 'zchee/deoplete-clang'
+"Plug 'tweekmonster/deoplete-clang2'
 Plug 'zchee/deoplete-go', { 'do': 'make'}
 Plug 'zchee/deoplete-jedi'
 
-Plug 'fneu/breezy'
+Plug 'kassio/neoterm'
 
 call plug#end()
 
@@ -94,16 +95,20 @@ nmap <C-P> :FZF<enter>
 nmap <C-B> :Buffers<enter>
 
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so'
+let g:deoplete#sources#clang#clang_header = '/usr/lib/clang'
 
 "Syntastic configuration
 let g:syntastic_python_checkers = ['flake8']
-"let g:syntastic_go_checkers = ['gometalinter', 'golint', 'govet', 'errcheck']
-let g:syntastic_go_checkers = ['gometalinter']
+let g:syntastic_go_checkers = ['golint', 'govet', 'gofmt']
+let g:syntastic_c_checkers = ['clang_tidy']
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_c_clang_tidy_post_args = ""
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
-let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go']}
+let g:syntastic_mode_map = { 'mode': 'active'}
 
 "Vim-Go configuration
 let g:go_list_type = "quickfix"
