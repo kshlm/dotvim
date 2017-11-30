@@ -2,13 +2,13 @@ if &compatible
   set nocompatible
 endif
 
-set runtimepath+=/home/kaushal/.config/nvim/bundle/repos/github.com/Shougo/dein.vim
+set runtimepath+=~/.config/nvim/bundle/repos/github.com/Shougo/dein.vim
 
-if dein#load_state('/home/kaushal/.config/nvim/bundle')
-  call dein#begin('/home/kaushal/.config/nvim/bundle')
+if dein#load_state('~/.config/nvim/bundle')
+  call dein#begin('~/.config/nvim/bundle')
 
   "Shougo's plugins
-  call dein#add('/home/kaushal/.config/nvim/bundle/repos/github.com/Shougo/dein.vim')
+  call dein#add('~/.config/nvim/bundle/repos/github.com/Shougo/dein.vim')
   call dein#add('Shougo/deoplete.nvim')
   call dein#add('Shougo/deol.nvim')
   call dein#add('Shougo/denite.nvim')
@@ -134,9 +134,9 @@ if executable('rg')
   call denite#custom#var('grep', 'pattern_opt', ['--match'])
   call denite#custom#var('grep', 'separator', ['--'])
   call denite#custom#var('grep', 'final_opts', [])
-  "Extra rg settings
-  set grepprg=rg\ --vimgrep
-  set grepformat^=%f:%l:%c:%m
+  ""Extra rg settings
+  "set grepprg=rg\ --vimgrep
+  "set grepformat^=%f:%l:%c:%m
 endif
 
 "Deoplete settings
@@ -148,7 +148,7 @@ let g:deoplete#sources#clang#clang_header = '/usr/lib/clang'
 let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_go_checkers = ['golint', 'govet', 'gofmt']
 let g:syntastic_c_checkers = ['clang_tidy']
-let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_checkers = ['eslint', 'jshint', 'jslint']
 let g:syntastic_c_clang_tidy_post_args = ""
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
