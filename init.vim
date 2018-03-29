@@ -46,7 +46,7 @@ if dein#load_state('~/.config/nvim/bundle')
   call dein#add('scrooloose/syntastic')
 
   "Go plugins
-  call dein#add('fatih/vim-go', {'on_ft': ['go'], 'rev': 'v1.15'})
+  call dein#add('fatih/vim-go', {'on_ft': ['go'], 'rev': 'v1.17'})
   call dein#add('zchee/deoplete-go', { 'build': 'make'})
 
   "C plugins
@@ -162,7 +162,7 @@ let g:sneak#use_ic_scs = 0
 autocmd ColorScheme * hi SneakLabel guifg=black guibg=red ctermfg=black ctermbg=red
 
 "UI settings at the end
-set background=dark
+set background=light
 "set termguicolors " if you want to run vim in a terminal
 colorscheme solarized
 let g:airline_powerline_fonts = 1
