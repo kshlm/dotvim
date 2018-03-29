@@ -110,6 +110,8 @@ set nofoldenable
 map <F2> :nohl<CR>
 map <F3> :set paste!<CR>
 
+tnoremap <Esc> <C-\><C-n>
+
 "Gui settings
 set gfn=Fantasque\ Sans\ Mono\ 11
 
