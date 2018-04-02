@@ -50,7 +50,7 @@ if dein#load_state('~/.config/nvim/bundle')
   call dein#add('zchee/deoplete-go', { 'build': 'make'})
 
   "C plugins
-  call dein#add('etaf/cscope_maps.vim', { 'on_ft' : ['c']})
+  call dein#add('etaf/cscope_maps.vim')
   call dein#add('zchee/deoplete-clang')
   "call dein#add('tweekmonster/deoplete-clang2')
 
@@ -74,6 +74,7 @@ if dein#load_state('~/.config/nvim/bundle')
   "call dein#add('puppetlabs/puppet-syntax-vim')
   "call dein#add('saltstack/salt-vim', {'on_ft': 'salt'})
   "call dein#add('zah/nimrod.vim', {'on_ft': 'nim'})
+  call dein#add('stfl/meson.vim')
 
   call dein#end()
   call dein#save_state()
@@ -130,15 +131,17 @@ nmap <C-P> :Denite file_rec<Enter>
 nmap <C-B> :Denite buffer<Enter>
 if executable('rg')
   call denite#custom#var('file_rec', 'command', ['rg', '--files', '--glob', '!.git', ''])
-  call denite#custom#var('grep', 'command', ['ack'])
-  call denite#custom#var('grep', 'default_opts', ['--ackrc', $HOME.'/.ackrc', '-H', '--nopager', '--nocolor', '--nogroup', '--column'])
+  " Ripgrep command on grep source
+  call denite#custom#var('grep', 'command', ['rg'])
+  call denite#custom#var('grep', 'default_opts',
+      \ ['--vimgrep', '--no-heading'])
   call denite#custom#var('grep', 'recursive_opts', [])
-  call denite#custom#var('grep', 'pattern_opt', ['--match'])
+  call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
   call denite#custom#var('grep', 'separator', ['--'])
   call denite#custom#var('grep', 'final_opts', [])
   ""Extra rg settings
-  "set grepprg=rg\ --vimgrep
-  "set grepformat^=%f:%l:%c:%m
+  set grepprg=rg\ --vimgrep
+  set grepformat^=%f:%l:%c:%m
 endif
 
 "Deoplete settings
