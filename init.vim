@@ -12,14 +12,14 @@ if dein#load_state('~/.config/nvim/bundle')
   call dein#add('Shougo/deoplete.nvim')
   call dein#add('Shougo/deol.nvim')
   call dein#add('Shougo/denite.nvim')
+  call dein#add('Shougo/neoyank.vim')
 
   "UI and Visual plugins
-  call dein#add('altercation/vim-colors-solarized')
+  call dein#add('lifepillar/vim-solarized8')
   call dein#add('bling/vim-bufferline')
   call dein#add('majutsushi/tagbar')
   call dein#add('mhinz/vim-signify')
   call dein#add('mhinz/vim-startify')
-  call dein#add('ryanoasis/vim-devicons')
   call dein#add('scrooloose/nerdtree')
   call dein#add('vim-airline/vim-airline')
   call dein#add('vim-airline/vim-airline-themes')
@@ -27,7 +27,6 @@ if dein#load_state('~/.config/nvim/bundle')
   call dein#add('metakirby5/codi.vim')
 
   "Utility plugins
-  "call dein#add('Lokaltog/vim-easymotion')
   call dein#add('bronson/vim-trailing-whitespace')
   call dein#add('editorconfig/editorconfig-vim')
   call dein#add('godlygeek/tabular')
@@ -43,38 +42,33 @@ if dein#load_state('~/.config/nvim/bundle')
   "General dev plugins
   call dein#add('Raimondi/delimitMate')
   call dein#add('diepm/vim-rest-console')
-  call dein#add('scrooloose/syntastic')
+  call dein#add('autozimu/LanguageClient-neovim', {'rev': 'next', 'build': 'bash install.sh'})
+  call dein#add('w0rp/ale')
 
   "Go plugins
-  call dein#add('fatih/vim-go', {'on_ft': ['go'], 'rev': 'v1.17'})
-  call dein#add('zchee/deoplete-go', { 'build': 'make'})
+  call dein#add('fatih/vim-go', {'rev': 'v1.20'})
 
   "C plugins
-  call dein#add('etaf/cscope_maps.vim')
-  call dein#add('zchee/deoplete-clang')
-  "call dein#add('tweekmonster/deoplete-clang2')
+  "call dein#add('etaf/cscope_maps.vim')
 
-  "Python plugins
-  call dein#add('zchee/deoplete-jedi')
+  "Rust plugins
+  call dein#add('rust-lang/rust.vim')
 
   "Elixir plugins
-  call dein#add('elixir-lang/vim-elixir', {'on_ft': 'elixir'})
-  call dein#add('slashmili/alchemist.vim', {'on_ft': 'elixir'})
+  call dein#add('elixir-lang/vim-elixir')
+  call dein#add('slashmili/alchemist.vim')
 
   "Lisp plugins
   call dein#add('kien/rainbow_parentheses.vim', {'on_ft': ['clojure','lisp', 'scheme', 'racket']})
 
+  "Markdown plugins
+  call dein#add('mzlogin/vim-markdown-toc')
+  call dein#add('suan/vim-instant-markdown')
+
   "Misc language and filetypes
   call dein#add('sheerun/vim-polyglot')
-  "call dein#add('cespare/vim-toml')
-  "call dein#add('chase/vim-ansible-yaml', {'on_ft': 'ansible'})
-  "call dein#add('chilicuil/vim-sml-coursera', {'on_ft': 'sml'})
-  "call dein#add('fhenrysson/vim-protobuf')
-  "call dein#add('jigish/vim-thrift')
-  "call dein#add('puppetlabs/puppet-syntax-vim')
-  "call dein#add('saltstack/salt-vim', {'on_ft': 'salt'})
-  "call dein#add('zah/nimrod.vim', {'on_ft': 'nim'})
   call dein#add('stfl/meson.vim')
+
 
   call dein#end()
   call dein#save_state()
@@ -100,11 +94,9 @@ set smartindent
 set scrolloff=5
 filetype plugin indent on
 set ruler
-set list
 syntax on
 set ofu=syntaxcomplete#Complete
 set hidden
-
 set foldmethod=syntax
 set nofoldenable
 
@@ -113,18 +105,9 @@ map <F3> :set paste!<CR>
 
 tnoremap <Esc> <C-\><C-n>
 
-"Gui settings
-set gfn=Fantasque\ Sans\ Mono\ 11
-
-"C settings
-autocmd Filetype c,cpp,cs,java,objc setlocal formatoptions+=cqrtnj textwidth=80 colorcolumn=81 tabstop=8 shiftwidth=8
-
-"Vim-Go configuration
-let g:go_list_type = "quickfix"
-
-"Misc filetype settings
-autocmd BufNewFile,BufRead Vagrantfile set filetype=ruby
-autocmd BufNewFile,BufRead *.xlator set filetype=toml
+"
+" General, UI and utility plugin settings
+"
 
 "Denite settings
 nmap <C-P> :Denite file_rec<Enter>
@@ -144,31 +127,53 @@ if executable('rg')
   set grepformat^=%f:%l:%c:%m
 endif
 
-"Deoplete settings
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so'
-let g:deoplete#sources#clang#clang_header = '/usr/lib/clang'
-
-"Syntastic configuration
-let g:syntastic_python_checkers = ['flake8']
-let g:syntastic_go_checkers = ['golint', 'govet', 'gofmt']
-let g:syntastic_c_checkers = ['clang_tidy']
-let g:syntastic_javascript_checkers = ['eslint', 'jshint', 'jslint']
-let g:syntastic_c_clang_tidy_post_args = ""
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-let g:syntastic_mode_map = { 'mode': 'active'}
-
 "Vim-sneak settings
 let g:sneak#label = 1
 let g:sneak#use_ic_scs = 0
 autocmd ColorScheme * hi SneakLabel guifg=black guibg=red ctermfg=black ctermbg=red
 
+"Tagbar
+autocmd VimEnter * nested :call tagbar#autoopen(1)
+autocmd BufEnter * nested :call tagbar#autoopen(0)
+autocmd FileType * nested :call tagbar#autoopen(0)
+
 "UI settings at the end
-set background=light
-"set termguicolors " if you want to run vim in a terminal
-colorscheme solarized
+set background=dark
+set termguicolors " if you want to run vim in a terminal
+colorscheme solarized8
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'solarized'
+let g:airline#extensions#ale#enabled = 1
+
+
+"
+" Development and language settings
+"
+
+"Deoplete settings
+let g:deoplete#enable_at_startup = 1
+call deoplete#custom#source('LanguageClient',
+            \ 'min_pattern_length',
+            \ 2)
+
+"LanguageClient settings
+let g:LanguageClient_serverCommands = {
+       \ 'go': ['gopls'],
+       \ 'cpp': ['clangd'],
+       \ 'c': ['clangd'],
+       \ 'python': ['pyls'],
+       \ 'rust': ['rls'],
+       \ }
+
+"C settings
+autocmd Filetype c,cpp,cs,java,objc setlocal formatoptions+=cqrtnj textwidth=80 colorcolumn=81 tabstop=8 shiftwidth=8
+
+"Vim-Go configuration
+let g:go_list_type = "quickfix"
+let g:go_def_mode = 'gopls'
+let g:go_info_mode = 'gopls'
+
+"Misc filetype settings
+autocmd BufNewFile,BufRead Vagrantfile set filetype=ruby
+autocmd BufNewFile,BufRead *.xlator set filetype=toml
+
