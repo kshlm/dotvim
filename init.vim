@@ -110,7 +110,7 @@ tnoremap <Esc> <C-\><C-n>
 "
 
 "Denite settings
-nmap <C-P> :Denite file_rec<Enter>
+nmap <C-P> :Denite file/rec<Enter>
 nmap <C-B> :Denite buffer<Enter>
 if executable('rg')
   call denite#custom#var('file_rec', 'command', ['rg', '--files', '--glob', '!.git', ''])
@@ -163,6 +163,7 @@ let g:LanguageClient_serverCommands = {
        \ 'c': ['clangd'],
        \ 'python': ['pyls'],
        \ 'rust': ['rls'],
+       \ 'yaml': ['yaml-language-server'],
        \ }
 
 "C settings
