@@ -45,11 +45,11 @@ if !exists('g:vscode')
     "General dev plugins
     call dein#add('Raimondi/delimitMate')
     call dein#add('diepm/vim-rest-console')
-    call dein#add('autozimu/LanguageClient-neovim', {'rev': 'next', 'build': 'bash install.sh'})
-    call dein#add('dense-analysis/ale')
+    call dein#add('Shougo/echodoc.vim')
+    call dein#add('neovim/nvim-lsp')
 
     "Go plugins
-    call dein#add('fatih/vim-go', {'rev': 'v1.21'})
+    call dein#add('fatih/vim-go', {'rev': 'v1.22'})
 
     "C plugins
     "call dein#add('etaf/cscope_maps.vim')
@@ -197,20 +197,11 @@ if !exists('g:vscode')
 
   "Deoplete settings
   let g:deoplete#enable_at_startup = 1
-  call deoplete#custom#source('LanguageClient',
-              \ 'min_pattern_length',
-              \ 2)
 
-  "LanguageClient settings
-  let g:LanguageClient_serverCommands = {
-         \ 'go': ['gopls'],
-         \ 'cpp': ['clangd'],
-         \ 'c': ['clangd'],
-         \ 'python': ['pyls'],
-         \ 'rust': ['rls'],
-         \ 'yaml': ['yaml-language-server'],
-         \ }
-  nnoremap <silent> <C-]> :call LanguageClient_textDocument_definition()<CR>
+  "Echodoc settings
+  set cmdheight=2
+  let g:echodoc#enable_at_startup = 1
+  let g:echodoc#type = 'signature'
 
   "C settings
   autocmd Filetype c,cpp,cs,java,objc setlocal formatoptions+=cqrtnj textwidth=80 colorcolumn=81 tabstop=8 shiftwidth=8
@@ -223,4 +214,30 @@ if !exists('g:vscode')
   "Misc filetype settings
   autocmd BufNewFile,BufRead Vagrantfile set filetype=ruby
   autocmd BufNewFile,BufRead *.xlator set filetype=toml
+
+  "nvim-lsp settings
+  set omnifunc=lsp#ominfunc
+
+  nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
+  nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
+  nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
+  nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
+  nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
+  nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
+  nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
+  nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
+  nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+lua <<EOF
+nvim_lsp = require 'nvim_lsp'
+
+nvim_lsp.vimls.setup{}
+nvim_lsp.gopls.setup{}
+nvim_lsp.pyls.setup{}
+nvim_lsp.rust_analyzer.setup{}
+nvim_lsp.jsonls.setup{}
+nvim_lsp.metals.setup{}
+nvim_lsp.sumneko_lua.setup{cmd = { "/Users/kaushal/.cache/nvim/nvim_lsp/sumneko_lua/lua-language-server/bin/macOS/lua-language-server", "-E", "/Users/kaushal/.cache/nvim/nvim_lsp/sumneko_lua/lua-language-server/main.lua" }}
+EOF
+
+
 endif
