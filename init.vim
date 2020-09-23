@@ -46,10 +46,11 @@ if !exists('g:vscode')
     call dein#add('Raimondi/delimitMate')
     call dein#add('diepm/vim-rest-console')
     call dein#add('Shougo/echodoc.vim')
-    call dein#add('neovim/nvim-lsp')
+    call dein#add('neovim/nvim-lspconfig')
+    call dein#add('nvim-treesitter/nvim-treesitter')
 
     "Go plugins
-    call dein#add('fatih/vim-go', {'rev': 'v1.22'})
+    call dein#add('fatih/vim-go', {'rev': 'v1.23'})
 
     "C plugins
     "call dein#add('etaf/cscope_maps.vim')
@@ -216,7 +217,7 @@ if !exists('g:vscode')
   autocmd BufNewFile,BufRead *.xlator set filetype=toml
 
   "nvim-lsp settings
-  set omnifunc=lsp#ominfunc
+  set omnifunc=v:lua.vim.lsp.omnifunc
 
   nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
   nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
@@ -227,17 +228,55 @@ if !exists('g:vscode')
   nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
   nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
   nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+
+  "nvim-lsp colors
+  function! s:lspColors() abort
+    highlight! link LspDiagnosticsError ErrorMsg
+    "highlight LspDiagnosticsErrorSign
+    highlight! link LspDiagnosticsWarning WarningMsg
+    "highlight LspDiagnosticsWarningSign
+    highlight! link LspDiagnosticsInformation MoreMsg
+    "highlight LspDiagnosticsInformationSign
+    highlight! link LspDiagnosticsHint MoreMsg
+    "highlight LspDiagnosticsHintSign
+    highlight! link LspReferenceText Comment
+    highlight! link LspReferenceRead Comment
+    highlight! link LspReferenceWrite Comment
+  endfunction
+  autocmd ColorScheme * call s:lspColors()
+
 lua <<EOF
 nvim_lsp = require 'nvim_lsp'
 
+nvim_lsp.bashls.setup{}
 nvim_lsp.vimls.setup{}
 nvim_lsp.gopls.setup{}
-nvim_lsp.pyls.setup{}
+nvim_lsp.pyls.setup{
+  settings = {
+    pyls = {
+      configurationSources = { "pycodestyle", "pyflakes" }
+    }
+  }
+}
 nvim_lsp.rust_analyzer.setup{}
 nvim_lsp.jsonls.setup{}
+nvim_lsp.yamlls.setup{}
 nvim_lsp.metals.setup{}
-nvim_lsp.sumneko_lua.setup{cmd = { "/Users/kaushal/.cache/nvim/nvim_lsp/sumneko_lua/lua-language-server/bin/macOS/lua-language-server", "-E", "/Users/kaushal/.cache/nvim/nvim_lsp/sumneko_lua/lua-language-server/main.lua" }}
-EOF
+nvim_lsp.sumneko_lua.setup{
+  cmd = { "/Users/kaushal/.cache/nvim/nvim_lsp/sumneko_lua/lua-language-server/bin/macOS/lua-language-server", "-E", "/Users/kaushal/.cache/nvim/nvim_lsp/sumneko_lua/lua-language-server/main.lua" }
+}
 
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "all",     -- one of "all", "language", or a list of languages
+  highlight = { enable = true },
+  incremental_selection = { enable = true },
+  refactor = {
+    highlight_definitions = { enable = true },
+    smart_rename = { enable = true },
+    navigation = { enable = true },
+  },
+  textobjects = { enable = true },
+}
+EOF
 
 endif
