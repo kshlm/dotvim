@@ -10,15 +10,11 @@ if !exists('g:vscode')
 
     "Shougo's plugins
     call dein#add('~/.config/nvim/bundle/repos/github.com/Shougo/dein.vim')
-    call dein#add('Shougo/deoplete.nvim')
     call dein#add('Shougo/deol.nvim')
-    call dein#add('Shougo/denite.nvim')
-    call dein#add('Shougo/neoyank.vim')
 
     "UI and Visual plugins
     call dein#add('lifepillar/vim-solarized8')
     call dein#add('bling/vim-bufferline')
-    call dein#add('majutsushi/tagbar')
     call dein#add('mhinz/vim-signify')
     call dein#add('mhinz/vim-startify')
     call dein#add('scrooloose/nerdtree')
@@ -26,14 +22,16 @@ if !exists('g:vscode')
     call dein#add('vim-airline/vim-airline-themes')
     call dein#add('vim-scripts/bufexplorer.zip')
     call dein#add('metakirby5/codi.vim')
+    call dein#add('nvim-lua/popup.nvim')
+    call dein#add('nvim-lua/plenary.nvim')
+    call dein#add('nvim-lua/telescope.nvim')
+    call dein#add('nvim-lua/lsp-status.nvim')
 
     "Utility plugins
     call dein#add('bronson/vim-trailing-whitespace')
     call dein#add('editorconfig/editorconfig-vim')
     call dein#add('godlygeek/tabular')
     call dein#add('justinmk/vim-sneak')
-    call dein#add('neoclide/denite-extra')
-    call dein#add('neoclide/denite-git')
     call dein#add('tpope/vim-dispatch')
     call dein#add('tpope/vim-fugitive')
     call dein#add('tpope/vim-repeat')
@@ -45,9 +43,10 @@ if !exists('g:vscode')
     "General dev plugins
     call dein#add('Raimondi/delimitMate')
     call dein#add('diepm/vim-rest-console')
-    call dein#add('Shougo/echodoc.vim')
     call dein#add('neovim/nvim-lspconfig')
     call dein#add('nvim-treesitter/nvim-treesitter')
+    call dein#add('nvim-lua/completion-nvim')
+    call dein#add('nvim-lua/diagnostic-nvim')
 
     "Go plugins
     call dein#add('fatih/vim-go', {'rev': 'v1.23'})
@@ -113,75 +112,11 @@ if !exists('g:vscode')
   " General, UI and utility plugin settings
   "
 
-  "Denite settings
-  call denite#custom#option('default', {
-      \ 'prompt': '❯'
-      \ })
-
-  call denite#custom#var('file/rec', 'command',
-        \ ['fd', '-H', '--full-path'])
-  call denite#custom#var('grep', 'command', ['rg'])
-  call denite#custom#var('grep', 'default_opts',
-        \ ['--hidden', '--vimgrep', '--smart-case'])
-  call denite#custom#var('grep', 'recursive_opts', [])
-  call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
-  call denite#custom#var('grep', 'separator', ['--'])
-  call denite#custom#var('grep', 'final_opts', [])
-  call denite#custom#option('_', 'max_dynamic_update_candidates', 100000)
-  call denite#custom#option('_', {
-        \ 'split': 'floating',
-        \ 'highlight_matched_char': 'Underlined',
-        \ 'highlight_matched_range': 'NormalFloat',
-        \ 'wincol': &columns / 6,
-        \ 'winwidth': &columns * 2 / 3,
-        \ 'winrow': &lines / 6,
-        \ 'winheight': &lines * 2 / 3
-        \ })
-
-  autocmd FileType denite call s:denite_settings()
-
-  function! s:denite_settings() abort
-    nnoremap <silent><buffer><expr> <CR>
-          \ denite#do_map('do_action')
-    nnoremap <silent><buffer><expr> <C-v>
-          \ denite#do_map('do_action', 'vsplit')
-    nnoremap <silent><buffer><expr> d
-          \ denite#do_map('do_action', 'delete')
-    nnoremap <silent><buffer><expr> p
-          \ denite#do_map('do_action', 'preview')
-    nnoremap <silent><buffer><expr> <Esc>
-          \ denite#do_map('quit')
-    nnoremap <silent><buffer><expr> q
-          \ denite#do_map('quit')
-    nnoremap <silent><buffer><expr> i
-          \ denite#do_map('open_filter_buffer')
-  endfunction
-
-  autocmd FileType denite-filter call s:denite_filter_settings()
-
-  function! s:denite_filter_settings() abort
-    nmap <silent><buffer> <Esc> <Plug>(denite_filter_quit)
-  endfunction
-
-  nnoremap <C-p> :<C-u>Denite file/rec -start-filter<CR>
-  nnoremap <leader>s :<C-u>Denite buffer<CR>
-  nnoremap <leader>8 :<C-u>DeniteCursorWord grep:.<CR>
-  nnoremap <leader>/ :<C-u>Denite -start-filter grep:::!<CR>
-  nnoremap <leader><Space>/ :<C-u>DeniteBufferDir -start-filter grep:::!<CR>
-  nnoremap <leader>d :<C-u>DeniteBufferDir file/rec -start-filter<CR>
-  nnoremap <leader>r :<C-u>Denite -resume -cursor-pos=+1<CR>
-  nnoremap <leader><C-r> :<C-u>Denite register:.<CR>
-  nnoremap <leader>g :<C-u>Denite gitstatus<CR>
-
   "Vim-sneak settings
   let g:sneak#label = 1
   let g:sneak#use_ic_scs = 0
   autocmd ColorScheme * hi SneakLabel guifg=black guibg=red ctermfg=black ctermbg=red
 
-  "Tagbar
-  autocmd VimEnter * nested :call tagbar#autoopen(1)
-  autocmd BufEnter * nested :call tagbar#autoopen(0)
-  autocmd FileType * nested :call tagbar#autoopen(0)
 
   "UI settings at the end
   set background=dark
@@ -190,19 +125,30 @@ if !exists('g:vscode')
   let g:airline_powerline_fonts = 1
   let g:airline_theme = 'solarized'
   let g:airline#extensions#ale#enabled = 1
+  let g:airline#extensions#nvimlsp#enabled = 0
 
+  "nvim-treesitter settings
+lua <<EOF
+EOF
+
+  "telescope.nvim settings
+  nnoremap <c-p> :lua require'telescope.builtin'.find_files{}<CR>
+  nnoremap <silent> gr <cmd>lua require'telescope.builtin'.lsp_references{ shorten_path = true }<CR>
+  nnoremap <silent> g0 <cmd>lua require'telescope.builtin'.lsp_document_symbols{ shorten_path = true }<CR>
+  nnoremap <silent> gW <cmd>lua require'telescope.builtin'.lsp_workspace_symbols{ shorten_path = true }<CR>
+
+  " Statusline
+  function! LspStatus() abort
+      let status = luaeval("require('lsp-status').status()")
+      return trim(status)
+  endfunction
+  call airline#parts#define_function('lsp_statusline', 'LspStatus')
+  call airline#parts#define_condition('lsp_statusline', 'luaeval("#vim.lsp.buf_get_clients() > 0")')
+  let g:airline_section_warning = airline#section#create_right(['lsp_statusline'])
 
   "
   " Development and language settings
   "
-
-  "Deoplete settings
-  let g:deoplete#enable_at_startup = 1
-
-  "Echodoc settings
-  set cmdheight=2
-  let g:echodoc#enable_at_startup = 1
-  let g:echodoc#type = 'signature'
 
   "C settings
   autocmd Filetype c,cpp,cs,java,objc setlocal formatoptions+=cqrtnj textwidth=80 colorcolumn=81 tabstop=8 shiftwidth=8
@@ -219,15 +165,7 @@ if !exists('g:vscode')
   "nvim-lsp settings
   set omnifunc=v:lua.vim.lsp.omnifunc
 
-  nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
   nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
-  nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
-  nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
-  nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
-  nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
-  nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
-  nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
-  nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 
   "nvim-lsp colors
   function! s:lspColors() abort
@@ -245,38 +183,15 @@ if !exists('g:vscode')
   endfunction
   autocmd ColorScheme * call s:lspColors()
 
-lua <<EOF
-nvim_lsp = require 'nvim_lsp'
+  "completion-nvim settings
+  inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+  inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+  set completeopt=menuone,noinsert,noselect
+  set shortmess+=c
 
-nvim_lsp.bashls.setup{}
-nvim_lsp.vimls.setup{}
-nvim_lsp.gopls.setup{}
-nvim_lsp.pyls.setup{
-  settings = {
-    pyls = {
-      configurationSources = { "pycodestyle", "pyflakes" }
-    }
-  }
-}
-nvim_lsp.rust_analyzer.setup{}
-nvim_lsp.jsonls.setup{}
-nvim_lsp.yamlls.setup{}
-nvim_lsp.metals.setup{}
-nvim_lsp.sumneko_lua.setup{
-  cmd = { "/Users/kaushal/.cache/nvim/nvim_lsp/sumneko_lua/lua-language-server/bin/macOS/lua-language-server", "-E", "/Users/kaushal/.cache/nvim/nvim_lsp/sumneko_lua/lua-language-server/main.lua" }
-}
+  "diagnostiv-nvim settings
+  let g:diagnostic_enable_virtual_text = 1
+  "let g:diagnostic_insert_delay = 1
 
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = "all",     -- one of "all", "language", or a list of languages
-  highlight = { enable = true },
-  incremental_selection = { enable = true },
-  refactor = {
-    highlight_definitions = { enable = true },
-    smart_rename = { enable = true },
-    navigation = { enable = true },
-  },
-  textobjects = { enable = true },
-}
-EOF
-
+  lua init = require("init")
 endif
