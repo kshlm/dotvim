@@ -3,79 +3,79 @@ if !exists('g:vscode')
     set nocompatible
   endif
 
-  set runtimepath+=~/.config/nvim/bundle/repos/github.com/Shougo/dein.vim
+  function! PackagerInit() abort
+    packadd vim-packager
+    call packager#init()
 
-  if dein#load_state('~/.config/nvim/bundle')
-    call dein#begin('~/.config/nvim/bundle')
-
-    "Shougo's plugins
-    call dein#add('~/.config/nvim/bundle/repos/github.com/Shougo/dein.vim')
-    call dein#add('Shougo/deol.nvim')
+    "vim-packager up first
+    call packager#add('kristijanhusak/vim-packager', {'type': 'opt'})
 
     "UI and Visual plugins
-    call dein#add('lifepillar/vim-solarized8')
-    call dein#add('bling/vim-bufferline')
-    call dein#add('mhinz/vim-signify')
-    call dein#add('mhinz/vim-startify')
-    call dein#add('scrooloose/nerdtree')
-    call dein#add('vim-airline/vim-airline')
-    call dein#add('vim-airline/vim-airline-themes')
-    call dein#add('vim-scripts/bufexplorer.zip')
-    call dein#add('metakirby5/codi.vim')
-    call dein#add('nvim-lua/popup.nvim')
-    call dein#add('nvim-lua/plenary.nvim')
-    call dein#add('nvim-lua/telescope.nvim')
-    call dein#add('nvim-lua/lsp-status.nvim')
+    call packager#add('bling/vim-bufferline')
+    call packager#add('lifepillar/vim-solarized8')
+    call packager#add('metakirby5/codi.vim')
+    call packager#add('mhinz/vim-signify')
+    call packager#add('mhinz/vim-startify')
+    call packager#add('nvim-lua/plenary.nvim')
+    call packager#add('nvim-lua/popup.nvim')
+    call packager#add('nvim-lua/telescope.nvim')
+    call packager#add('scrooloose/nerdtree')
+    call packager#add('vim-airline/vim-airline')
+    call packager#add('vim-airline/vim-airline-themes')
+    call packager#add('vim-scripts/bufexplorer.zip')
+    call packager#add('ryanoasis/vim-devicons')
 
     "Utility plugins
-    call dein#add('bronson/vim-trailing-whitespace')
-    call dein#add('editorconfig/editorconfig-vim')
-    call dein#add('godlygeek/tabular')
-    call dein#add('justinmk/vim-sneak')
-    call dein#add('tpope/vim-dispatch')
-    call dein#add('tpope/vim-fugitive')
-    call dein#add('tpope/vim-repeat')
-    call dein#add('tpope/vim-surround')
-    call dein#add('vim-scripts/SearchComplete')
-    call dein#add('vim-scripts/The-NERD-Commenter')
-    call dein#add('vim-scripts/a.vim')
+    call packager#add('Shougo/deol.nvim')
+    call packager#add('bronson/vim-trailing-whitespace')
+    call packager#add('editorconfig/editorconfig-vim')
+    call packager#add('godlygeek/tabular')
+    call packager#add('justinmk/vim-sneak')
+    call packager#add('tpope/vim-dispatch')
+    call packager#add('tpope/vim-fugitive')
+    call packager#add('tpope/vim-repeat')
+    call packager#add('tpope/vim-surround')
+    call packager#add('vim-scripts/SearchComplete')
+    call packager#add('vim-scripts/The-NERD-Commenter')
+    call packager#add('vim-scripts/a.vim')
 
     "General dev plugins
-    call dein#add('Raimondi/delimitMate')
-    call dein#add('diepm/vim-rest-console')
-    call dein#add('neovim/nvim-lspconfig')
-    call dein#add('nvim-treesitter/nvim-treesitter')
-    call dein#add('nvim-lua/completion-nvim')
-    call dein#add('nvim-lua/diagnostic-nvim')
+    call packager#add('Raimondi/delimitMate')
+    call packager#add('diepm/vim-rest-console')
+    call packager#add('neovim/nvim-lspconfig')
+    call packager#add('nvim-lua/completion-nvim')
+    call packager#add('nvim-lua/diagnostic-nvim')
+    call packager#add('nvim-treesitter/nvim-treesitter')
 
     "Go plugins
-    call dein#add('fatih/vim-go', {'rev': 'v1.23'})
+    call packager#add('fatih/vim-go', {'tag': 'v1.23', 'do': ':GoInstallBinaries'})
 
     "C plugins
-    "call dein#add('etaf/cscope_maps.vim')
+    "call packager#add('etaf/cscope_maps.vim')
 
     "Rust plugins
-    call dein#add('rust-lang/rust.vim')
+    call packager#add('rust-lang/rust.vim')
 
     "Elixir plugins
-    call dein#add('elixir-lang/vim-elixir')
-    call dein#add('slashmili/alchemist.vim')
+    call packager#add('elixir-lang/vim-elixir')
+    call packager#add('slashmili/alchemist.vim')
 
     "Lisp plugins
-    call dein#add('kien/rainbow_parentheses.vim', {'on_ft': ['clojure','lisp', 'scheme', 'racket']})
+    call packager#add('kien/rainbow_parentheses.vim', {'on_ft': ['clojure','lisp', 'scheme', 'racket']})
 
     "Markdown plugins
-    call dein#add('mzlogin/vim-markdown-toc')
-    call dein#add('suan/vim-instant-markdown')
+    call packager#add('mzlogin/vim-markdown-toc')
+    call packager#add('suan/vim-instant-markdown')
 
     "Misc language and filetypes
-    call dein#add('sheerun/vim-polyglot')
-    call dein#add('stfl/meson.vim')
+    call packager#add('sheerun/vim-polyglot')
+    call packager#add('stfl/meson.vim')
+  endfunction
 
-
-    call dein#end()
-    call dein#save_state()
-  endif
+  command! PackagerInstall call PackagerInit() | call packager#install()
+  command! -bang PackagerUpdate call PackagerInit() | call packager#update({ 'force_hooks': '<bang>' })
+  command! PackagerClean call PackagerInit() | call packager#clean()
+  command! PackagerStatus call PackagerInit() | call packager#status()
 
   "General settings
   set nobackup
@@ -125,26 +125,13 @@ if !exists('g:vscode')
   let g:airline_powerline_fonts = 1
   let g:airline_theme = 'solarized'
   let g:airline#extensions#ale#enabled = 1
-  let g:airline#extensions#nvimlsp#enabled = 0
-
-  "nvim-treesitter settings
-lua <<EOF
-EOF
+  "let g:airline#extensions#nvimlsp#enabled = 0
 
   "telescope.nvim settings
   nnoremap <c-p> :lua require'telescope.builtin'.find_files{}<CR>
   nnoremap <silent> gr <cmd>lua require'telescope.builtin'.lsp_references{ shorten_path = true }<CR>
   nnoremap <silent> g0 <cmd>lua require'telescope.builtin'.lsp_document_symbols{ shorten_path = true }<CR>
   nnoremap <silent> gW <cmd>lua require'telescope.builtin'.lsp_workspace_symbols{ shorten_path = true }<CR>
-
-  " Statusline
-  function! LspStatus() abort
-      let status = luaeval("require('lsp-status').status()")
-      return trim(status)
-  endfunction
-  call airline#parts#define_function('lsp_statusline', 'LspStatus')
-  call airline#parts#define_condition('lsp_statusline', 'luaeval("#vim.lsp.buf_get_clients() > 0")')
-  let g:airline_section_warning = airline#section#create_right(['lsp_statusline'])
 
   "
   " Development and language settings
@@ -189,9 +176,10 @@ EOF
   set completeopt=menuone,noinsert,noselect
   set shortmess+=c
 
-  "diagnostiv-nvim settings
+  "diagnostic-nvim settings
   let g:diagnostic_enable_virtual_text = 1
   "let g:diagnostic_insert_delay = 1
 
+  packloadall
   lua init = require("init")
 endif
