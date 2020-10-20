@@ -173,6 +173,13 @@ if !exists('g:vscode')
   "completion-nvim settings
   inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
   inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+  let g:completion_auto_change_source = 1
+  let g:completion_chain_complete_list = [
+    \{'complete_items': ['lsp', 'snippet', 'path']},
+    \{'mode': '<c-p>'},
+    \{'mode': '<c-n>'}
+    \]
+  let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy', 'all']
   set completeopt=menuone,noinsert,noselect
   set shortmess+=c
 

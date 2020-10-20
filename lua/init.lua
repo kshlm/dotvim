@@ -8,7 +8,6 @@ setmetatable(kind_labels, kind_labels_mt)
 
 -- nvim-lsp settings
 local nvim_lsp = require('nvim_lsp')
-local configs = require('nvim_lsp/configs')
 
 local on_attach = function(client, bufnr)
   require'completion'.on_attach(client, bufnr)
