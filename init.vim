@@ -11,7 +11,7 @@ if !exists('g:vscode')
     call packager#add('kristijanhusak/vim-packager', {'type': 'opt'})
 
     "UI and Visual plugins
-    call packager#add('bling/vim-bufferline')
+    "call packager#add('bling/vim-bufferline')
     call packager#add('lifepillar/vim-solarized8')
     call packager#add('metakirby5/codi.vim')
     call packager#add('mhinz/vim-signify')
@@ -20,10 +20,12 @@ if !exists('g:vscode')
     call packager#add('nvim-lua/popup.nvim')
     call packager#add('nvim-lua/telescope.nvim')
     call packager#add('scrooloose/nerdtree')
-    call packager#add('vim-airline/vim-airline')
-    call packager#add('vim-airline/vim-airline-themes')
-    call packager#add('vim-scripts/bufexplorer.zip')
+    "call packager#add('vim-airline/vim-airline')
+    "call packager#add('vim-airline/vim-airline-themes')
+    call packager#add('glepnir/galaxyline.nvim')
+    call packager#add('romgrk/barbar.nvim')
     call packager#add('ryanoasis/vim-devicons')
+    call packager#add('kyazdani42/nvim-web-devicons')
 
     "Utility plugins
     call packager#add('Shougo/deol.nvim')
@@ -44,8 +46,8 @@ if !exists('g:vscode')
     call packager#add('diepm/vim-rest-console')
     call packager#add('neovim/nvim-lspconfig')
     call packager#add('nvim-lua/completion-nvim')
-    call packager#add('nvim-lua/diagnostic-nvim')
     call packager#add('nvim-treesitter/nvim-treesitter')
+    call packager#add('romgrk/nvim-treesitter-context')
 
     "Go plugins
     call packager#add('fatih/vim-go', {'tag': 'v1.23', 'do': ':GoInstallBinaries'})
@@ -122,10 +124,12 @@ if !exists('g:vscode')
   set background=dark
   set termguicolors " if you want to run vim in a terminal
   colorscheme solarized8
-  let g:airline_powerline_fonts = 1
-  let g:airline_theme = 'solarized'
-  let g:airline#extensions#ale#enabled = 1
-  "let g:airline#extensions#nvimlsp#enabled = 0
+
+  "barbar.nvim
+  let bufferline = {}
+  let bufferline.animation = v:false
+  let bufferline.closable = v:false
+  let bufferline.clickable = v:false
 
   "telescope.nvim settings
   nnoremap <c-p> :lua require'telescope.builtin'.find_files{}<CR>
@@ -156,19 +160,19 @@ if !exists('g:vscode')
 
   "nvim-lsp colors
   function! s:lspColors() abort
-    highlight! link LspDiagnosticsError ErrorMsg
-    "highlight LspDiagnosticsErrorSign
-    highlight! link LspDiagnosticsWarning WarningMsg
-    "highlight LspDiagnosticsWarningSign
-    highlight! link LspDiagnosticsInformation MoreMsg
-    "highlight LspDiagnosticsInformationSign
-    highlight! link LspDiagnosticsHint MoreMsg
+    highlight! link LspDiagnosticsDefaultError ErrorMsg
+    "highlight LspDiagnosticsSignError
+    highlight! link LspDiagnosticsDefaultWarning WarningMsg
+    "highlight LspDiagnosticsSignWarning
+    highlight! link LspDiagnosticsDefaultInformation MoreMsg
+    "highlight LspDiagnosticsSignInformation
+    highlight! link LspDiagnosticsDefaultHint MoreMsg
     "highlight LspDiagnosticsHintSign
     highlight! link LspReferenceText Comment
     highlight! link LspReferenceRead Comment
     highlight! link LspReferenceWrite Comment
   endfunction
-  autocmd ColorScheme * call s:lspColors()
+  "autocmd ColorScheme * call s:lspColors()
 
   "completion-nvim settings
   inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -182,10 +186,6 @@ if !exists('g:vscode')
   let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy', 'all']
   set completeopt=menuone,noinsert,noselect
   set shortmess+=c
-
-  "diagnostic-nvim settings
-  let g:diagnostic_enable_virtual_text = 1
-  "let g:diagnostic_insert_delay = 1
 
   packloadall
   lua init = require("init")
