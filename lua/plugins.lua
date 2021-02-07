@@ -1,5 +1,6 @@
 local function load(use)
   use {'wbthomason/packer.nvim', opt = true}
+  use {'svermeulen/vimpeccable', opt = true}
 
   -- UI and Visual plugins
   use 'lifepillar/vim-solarized8'

@@ -1,0 +1,6 @@
+[submodule "pack/packer/opt/packer.nvim"]
+	path = pack/packer/opt/packer.nvim
+	url = https://github.com/wbthomason/packer.nvim.git
+[submodule "pack/packer/opt/vimpeccable"]
+	path = pack/packer/opt/vimpeccable
+	url = https://github.com/svermeulen/vimpeccable.git
