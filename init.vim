@@ -1,7 +1,3 @@
-if &compatible
-  set nocompatible
-endif
-
 set background=dark
 set termguicolors " if you want to run vim in a terminal
 
@@ -38,17 +34,6 @@ let g:sneak#label = 1
 let g:sneak#use_ic_scs = 0
 autocmd ColorScheme * hi SneakLabel guifg=black guibg=red ctermfg=black ctermbg=red
 
-
-"UI settings at the end
-
-" nvim-tree settings
-highlight link NvimTreeFolderName Title
-highlight link NvimTreeFolderIcon Tag
-let g:nvim_tree_auto_close = 1
-let g:nvim_tree_quit_on_open = 1
-let g:nvim_tree_indent_markers = 1
-nnoremap <silent> <F3> :NvimTreeToggle<CR>
-nnoremap <silent> <Leader><F3> :NvimTreeFindFile<CR>
 
 "Miscellaneous settings
 
