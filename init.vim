@@ -22,7 +22,6 @@ set nofoldenable foldmethod=expr foldexpr=nvim_treesitter#foldexpr()
 set nu rnu ruler
 set scrolloff=5
 set shortmess+=c
-set showcmd
 set showmatch
 set wildmenu wildmode=full
 
@@ -51,23 +50,7 @@ let g:nvim_tree_indent_markers = 1
 nnoremap <silent> <F3> :NvimTreeToggle<CR>
 nnoremap <silent> <Leader><F3> :NvimTreeFindFile<CR>
 
-"telescope.nvim settings
-nnoremap <c-p> :Telescope find_files<CR>
-nnoremap <c-b> :Telescope buffers<CR>
-nnoremap <leader>rg :Telescope live_grep<CR>
-nnoremap <silent> gr :Telescope lsp_references<CR>
-nnoremap <silent> g0 :Telescope lsp_document_symbols<CR>
-nnoremap <silent> gW :Telescope lsp_workspace_symbols<CR>
-
-"Lexima + Compe
-let g:lexima_no_default_rules = v:true
-call lexima#set_default_rules()
-inoremap <silent><expr> <C-Space> compe#complete()
-inoremap <silent><expr> <CR>      compe#confirm(lexima#expand('<LT>CR>', 'i'))
-inoremap <silent><expr> <C-e>     compe#close('<C-e>')
-
 "Miscellaneous settings
-autocmd BufRead,BufNewFile zsh* set filetype=zsh
 
 "
 " Development and language settings
@@ -84,5 +67,6 @@ let g:go_info_mode = 'gopls'
 "Misc filetype settings
 autocmd BufNewFile,BufRead Vagrantfile set filetype=ruby
 autocmd BufNewFile,BufRead *.xlator set filetype=toml
+autocmd BufRead,BufNewFile zsh* set filetype=zsh
 
 nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
