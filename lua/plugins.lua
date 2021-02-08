@@ -1,5 +1,7 @@
 local function load(use)
   use {'wbthomason/packer.nvim', opt = true}
+
+  -- lua config helpers
   use {'svermeulen/vimpeccable'}
 
   -- UI and Visual plugins
@@ -7,11 +9,7 @@ local function load(use)
   use {
     'hoob3rt/lualine.nvim',
     requires = {'kyazdani42/nvim-web-devicons'},
-    config  = function()
-      local lualine = require 'lualine'
-      lualine.theme = 'solarized'
-      lualine.status()
-    end,
+    config = function() require 'cfg.lualine' end,
   }
   use {
     'romgrk/barbar.nvim',
@@ -20,6 +18,7 @@ local function load(use)
   use {
     'kyazdani42/nvim-tree.lua',
     requires = {'kyazdani42/nvim-web-devicons'},
+    config = function() require 'cfg.nvimtree' end,
   }
   use {
     'nvim-telescope/telescope.nvim',
@@ -28,6 +27,7 @@ local function load(use)
       'nvim-lua/popup.nvim',
       'nvim-lua/plenary.nvim',
     },
+    config = function() require 'cfg.telescope' end,
   }
   use 'mhinz/vim-signify'
 
@@ -50,11 +50,15 @@ local function load(use)
     'hrsh7th/nvim-compe',
     config = function() require 'cfg.compe' end,
   }
-  use 'neovim/nvim-lspconfig'
+  use {
+    'neovim/nvim-lspconfig',
+    config = function() require 'cfg.lsp' end,
+  }
   use 'anott03/nvim-lspinstall'
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ":TSUpdate",
+    config = function() require 'cfg.treesitter' end,
   }
   use {
     'romgrk/nvim-treesitter-context',
@@ -87,7 +91,8 @@ local function load(use)
   -- Scala plugins
   use {
     'scalameta/nvim-metals',
-    ft = 'scala'
+    ft = {'scala', 'sbt'},
+    config = function() require 'cfg.metals' end,
   }
   -- Misc language and filetypes
   use 'sheerun/vim-polyglot'
