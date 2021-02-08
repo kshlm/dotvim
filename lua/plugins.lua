@@ -66,19 +66,32 @@ local function load(use)
     'fatih/vim-go',
     tag = 'v1.23',
     run = ':GoInstallBinaries',
+    ft = {'go', 'gomod', 'gosum'}
   }
 
   -- Rust plugins
-  use 'rust-lang/rust.vim'
+  use {
+    'rust-lang/rust.vim',
+    ft = 'rust'
+  }
 
   -- Elixir plugins
-  use 'elixir-lang/vim-elixir'
+  use {
+    'elixir-lang/vim-elixir',
+    ft = 'elixir'
+  }
 
+  -- Lua devel plugins
+  use 'rafcamlet/nvim-luapad'
+
+  -- Scala plugins
+  use {
+    'scalameta/nvim-metals',
+    ft = 'scala'
+  }
   -- Misc language and filetypes
   use 'sheerun/vim-polyglot'
 
-  -- nvim-lua devel plugins
-  use 'rafcamlet/nvim-luapad'
 end
 
 return function()
