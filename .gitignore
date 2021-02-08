@@ -2,3 +2,4 @@ bundle/*
 .netrwhist
 pack/*
 plugin/packer_compiled.vim
+*.bak
