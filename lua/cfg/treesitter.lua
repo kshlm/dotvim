@@ -10,6 +10,7 @@ parser_config.elixir = {
   used_by = { "eelixir" },
 }
 require'nvim-treesitter.configs'.setup {
+  autopairs = { enable = true },
   ensure_installed = 'maintained',     -- one of 'all', 'language', or a list of languages
   highlight = { enable = true },
   incremental_selection = { enable = true },

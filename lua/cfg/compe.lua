@@ -48,15 +48,6 @@ local function s_tab_complete()
   end
 end
 
-local bind_opts = {'expr', 'silent', 'override'}
-
+local bind_opts = {'expr', 'silent'}
 vimp.bind('is', bind_opts, '<Tab>', tab_complete)
 vimp.bind('is', bind_opts, '<S-Tab>', s_tab_complete)
-
--- Work well with Lexima
-vim.g.lexima_no_default_rules = true
-vim.fn['lexima#set_default_rules']()
-vimp.inoremap(bind_opts, '<C-Space>', 'compe#complete()')
-vimp.inoremap({'expr', 'silent', 'override'}, '<CR>',
-  'compe#confirm(lexima#expand("<LT>CR>", "i"))')
-vimp.inoremap(bind_opts, '<C-e>', 'compe#close("<C-e>")')

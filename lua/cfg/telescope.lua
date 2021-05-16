@@ -12,7 +12,7 @@ local cfg = {
 }
 telescope.setup {defaults = cfg}
 
-local bind_opts = {'override'}
+local bind_opts = {'silent'}
 vimp.nnoremap(bind_opts, '<C-p>', builtin.find_files)
 vimp.nnoremap(bind_opts, '<C-b>', builtin.buffers)
 vimp.nnoremap(bind_opts, '<leader>rg', builtin.live_grep)

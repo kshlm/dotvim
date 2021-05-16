@@ -3,14 +3,16 @@ local function load(use)
 
   -- Some helpers
   use 'svermeulen/vimpeccable'
-  use 'famiu/nvim-reload'
-
+  use {
+    'famiu/nvim-reload',
+    config = function() require('cfg.reload') end,
+  }
   -- UI and Visual plugins
   use 'lifepillar/vim-solarized8'
   use {
     'hoob3rt/lualine.nvim',
     requires = {'kyazdani42/nvim-web-devicons'},
-    config = function() require 'cfg.lualine' end,
+    config = function() require('cfg.lualine') end,
   }
   use {
     'romgrk/barbar.nvim',
@@ -19,7 +21,7 @@ local function load(use)
   use {
     'kyazdani42/nvim-tree.lua',
     requires = {'kyazdani42/nvim-web-devicons'},
-    config = function() require 'cfg.nvimtree' end,
+    config = function() require('cfg.nvimtree') end,
   }
   use {
     'nvim-telescope/telescope.nvim',
@@ -28,7 +30,7 @@ local function load(use)
       'nvim-lua/popup.nvim',
       'nvim-lua/plenary.nvim',
     },
-    config = function() require 'cfg.telescope' end,
+    config = function() require('cfg.telescope') end,
   }
   use 'mhinz/vim-signify'
 
@@ -38,7 +40,7 @@ local function load(use)
   use 'godlygeek/tabular'
   use {
     'justinmk/vim-sneak',
-    config = function() require 'cfg.sneak' end,
+    config = function() require('cfg.sneak') end,
   }
   use 'tpope/vim-dispatch'
   use 'tpope/vim-fugitive'
@@ -54,7 +56,7 @@ local function load(use)
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ":TSUpdate",
-    config = function() require 'cfg.treesitter' end,
+    config = function() require('cfg.treesitter') end,
   }
   use {
     'romgrk/nvim-treesitter-context',
@@ -73,37 +75,43 @@ local function load(use)
       'kabouzeid/nvim-lspinstall',
       'glepnir/lspsaga.nvim'
     },
-    config = function() require 'cfg.lsp' end,
+    config = function() require('cfg.lsp') end,
   }
   use {
     'onsails/lspkind-nvim',
     requires = 'neovim/nvim-lspconfig',
-    config = function() require'lspkind'.init() end,
+    config = function() require('lspkind').init() end,
   }
   use 'folke/lsp-colors.nvim'
   -- Others
-  use 'cohama/lexima.vim'
+
   use 'hrsh7th/vim-vsnip'
   use {
     'hrsh7th/nvim-compe',
-    config = function() require 'cfg.compe' end,
+    requires = 'hrsh7th/vim-vsnip',
+    config = function() require('cfg.compe') end,
+  }
+  use {
+    'windwp/nvim-autopairs',
+    requires = 'hrsh7th/nvim-compe',
+    config = function() require('cfg.autopairs') end,
   }
   use {
     'windwp/nvim-ts-autotag',
-    config = function() require'nvim-ts-autotag'.setup() end,
+    config = function() require('nvim-ts-autotag').setup() end,
   }
 
   -- Scala plugins
   use {
     'scalameta/nvim-metals',
     ft = {'scala', 'sbt'},
-    config = function() require 'cfg.metals' end,
+    config = function() require('cfg.metals') end,
   }
 end
 
 return function()
-  vim.cmd 'packadd packer.nvim'
-  local packer = require 'packer'
-  packer.startup {load}
-  vim.cmd 'autocmd BufWritePost plugins.lua PackerCompile'
+  vim.cmd [[packadd packer.nvim]]
+  local packer = require ('packer')
+  packer.startup({load})
+  vim.cmd [[autocmd BufWritePost plugins.lua PackerCompile]]
 end

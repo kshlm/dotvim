@@ -5,7 +5,7 @@ local vimp = require'vimp'
 
 vim.o.background = 'dark'
 vim.o.termguicolors = true
-vim.cmd [[ 
+vim.cmd [[
   colorscheme solarized8
   syntax on
 ]]
@@ -49,7 +49,7 @@ for scope, opts in pairs(all_opts) do
   end
 end
 
-vimp.bind('nvo', {'silent'}, '<F2>', vim.cmd [[nohl]])
+vimp.bind('nvo', {'silent'}, '<F2>', [[:nohl<CR>]])
 vimp.tnoremap({'silent'}, '<Esc>', [[<C-\><C-n>]])
 
 vim.cmd [[
