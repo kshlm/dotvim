@@ -50,21 +50,21 @@ local function load(use)
     'hrsh7th/nvim-compe',
     config = function() require 'cfg.compe' end,
   }
+  use 'kabouzeid/nvim-lspinstall'
+  use 'glepnir/lspsaga.nvim'
   use {
     'neovim/nvim-lspconfig',
+    requires = {
+      'kabouzeid/nvim-lspinstall',
+      'glepnir/lspsaga.nvim'
+    },
     config = function() require 'cfg.lsp' end,
-  }
-  use {
-    'glepnir/lspsaga.nvim',
-    requires = 'neovim/nvim-lspconfig',
-    config = function() require 'cfg.lspsaga' end,
   }
   use {
     'onsails/lspkind-nvim',
     requires = 'neovim/nvim-lspconfig',
     config = function() require'lspkind'.init() end,
   }
-  use 'anott03/nvim-lspinstall'
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ":TSUpdate",
@@ -72,7 +72,7 @@ local function load(use)
   }
   use {
     'romgrk/nvim-treesitter-context',
-    requires = { 'nvim-treesitter/nvim-treesitter' }
+    requires = 'nvim-treesitter/nvim-treesitter'
   }
 
   -- Go plugins
@@ -95,9 +95,6 @@ local function load(use)
     ft = 'elixir'
   }
 
-  -- Lua devel plugins
-  use 'rafcamlet/nvim-luapad'
-
   -- Scala plugins
   use {
     'scalameta/nvim-metals',
@@ -105,7 +102,7 @@ local function load(use)
     config = function() require 'cfg.metals' end,
   }
   -- Misc language and filetypes
-  -- use 'sheerun/vim-polyglot'
+  use 'sheerun/vim-polyglot'
 
 end
 

@@ -1,40 +1,112 @@
--- nvim-lspconfig settings
+-- All LSP related config goes here
+local lsp = require('vim.lsp')
 local lspconfig = require('lspconfig')
+local lspinstall = require('lspinstall')
+local saga = require('lspsaga')
+local vimp = require('vimp')
 
 local on_attach = function(client, bufnr)
-  local opts = {noremap = true, silent = true}
-  -- cf. :help lsp-config for tips on what to map
-  --[[ vim.api.nvim_buf_set_keymap(bufnr, "n", "gh", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "gH", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "gO", "<cmd>lua vim.lsp.buf.references()<CR><cmd>copen<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>lh", "<cmd>lua vim.lsp.buf.document_highlight()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>lH", "<cmd>lua init.clear_document_highlight()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>ld", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts) ]]
+  vim.bo[bufnr].omnifunc = 'v:lua.vim.lsp.omnifunc'
+
+  -- Mappings.
+  vimp.add_buffer_maps(bufnr, function()
+    local opts = {'silent'}
+    vimp.nnoremap(opts, 'gh', require'lspsaga.provider'.lsp_finder)
+    vimp.nnoremap(opts, '<leader>ca', require'lspsaga.codeaction'.code_action)
+    vimp.nnoremap(opts, 'K', require'lspsaga.hover'.render_hover_doc)
+    vimp.nnoremap(opts, 'gs', require'lspsaga.signaturehelp'.signature_help)
+    vimp.nnoremap(opts, 'gr', require'lspsaga.rename'.rename)
+    vimp.nnoremap(opts, 'gd', require'lspsaga.provider'.preview_definition)
+    vimp.nnoremap(opts, '<leader>cd', require'lspsaga.diagnostic'.show_line_diagnostics)
+    vimp.nnoremap(opts, ']e', require'lspsaga.diagnostic'.lsp_jump_diagnostic_next)
+    vimp.nnoremap(opts, '[e', require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev)
+    -- Set some keybinds conditional on server capabilities
+    if client.resolved_capabilities.document_formatting then
+      vimp.nnoremap(opts, "<leader>f", lsp.buf.formatting)
+    elseif client.resolved_capabilities.document_range_formatting then
+      vimp.nnoremap(opts, "<leader>f", lsp.buf.range_formatting)
+    end
+  end)
+
+  -- Set autocommands conditional on server_capabilities
+  if client.resolved_capabilities.document_highlight then
+    vim.api.nvim_exec([[
+    augroup lsp_document_highlight
+    autocmd! * <buffer>
+    autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+    autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+    augroup END
+    ]], false)
+  end
 end
 
-local servers = {
-  clangd = {},
-  gopls = {},
-  pyls = {
-    pyls = {
-      configurationSources = { "pycodestyle", "pyflakes" }
+local function setup_servers()
+  lspinstall.setup()
+
+  -- Add the servers installed by LspInstall first
+  local servers = {}
+  vim.tbl_map(function(lang) servers[lang] = {} end, lspinstall.installed_servers())
+
+  servers = vim.tbl_deep_extend('force', servers, {
+    clangd = {},
+    elixirls = {
+      cmd = { "/usr/bin/elixir-ls" },
+    },
+    gopls = {},
+    lua = {
+      settings = {
+        Lua = {
+          runtime = {
+            -- LuaJIT in the case of Neovim
+            version = 'LuaJIT',
+            path = vim.split(package.path, ';'),
+          },
+          diagnostics = {
+            -- Get the language server to recognize the `vim` global
+            globals = {'vim'},
+          },
+          workspace = {
+            -- Make the server aware of Neovim runtime files
+            library = {
+              [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+              [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
+            },
+          },
+        }
+      }
+    },
+    rust_analyzer = {},
+    zls = {},
+  })
+
+  local make_config = function(config)
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities.textDocument.completion.completionItem.snippetSupport = true
+    capabilities.textDocument.completion.completionItem.resolveSupport = {
+      properties = {
+        'documentation',
+        'detail',
+        'additionalTextEdits',
+      }
     }
-  },
-  rust_analyzer = {},
-  zls = {},
-}
-for ls, settings in pairs(servers) do lspconfig[ls].setup{
-    -- on_attach = on_attach,
-    settings = settings,
-  }
+    return vim.tbl_extend('error', {
+      capabilities = capabilities,
+      on_attach = on_attach,
+    }, config)
+  end
+
+  for lang, config in pairs(servers) do
+    lspconfig[lang].setup(make_config(config))
+  end
 end
-lspconfig.elixirls.setup {
-  cmd = { "/usr/bin/elixir-ls" },
-}
+
+setup_servers()
+
+-- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
+require'lspinstall'.post_install_hook = function ()
+  setup_servers() -- reload installed servers
+  vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
+end
 
 -- lsp-diagnostic settings
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
@@ -45,3 +117,13 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     virtual_text = true,
   }
 )
+
+-- lspsaga settings
+saga.init_lsp_saga(
+  {
+    code_action_prompt = {
+      sign = false,
+    }
+  }
+)
+
