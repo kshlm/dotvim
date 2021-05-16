@@ -12,10 +12,8 @@ local cfg = {
 }
 telescope.setup {defaults = cfg}
 
-vimp.nnoremap('<C-p>', builtin.find_files)
-vimp.nnoremap('<C-b>', builtin.buffers)
-vimp.nnoremap('<leader>rg', builtin.live_grep)
-vimp.nnoremap('ts', builtin.builtin)
--- vimp.nnoremap({'silent'}, 'gr', builtin.lsp_references)
-vimp.nnoremap({'silent'}, 'g0', builtin.lsp_document_symbols)
-vimp.nnoremap({'silent'}, 'gW', builtin.lsp_workspace_symbols)
+local bind_opts = {'override'}
+vimp.nnoremap(bind_opts, '<C-p>', builtin.find_files)
+vimp.nnoremap(bind_opts, '<C-b>', builtin.buffers)
+vimp.nnoremap(bind_opts, '<leader>rg', builtin.live_grep)
+vimp.nnoremap(bind_opts, 'ts', builtin.builtin)

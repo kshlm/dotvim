@@ -6,5 +6,6 @@ vim.g.nvim_tree_auto_close = 1
 vim.g.nvim_tree_quit_on_open = 1
 vim.g.nvim_tree_indent_markers = 1
 
-vimp.nnoremap({'silent'}, '<F3>', ':NvimTreeToggle<CR>')
-vimp.nnoremap({'silent'}, '<Leader><F3>', ':NvimTreeFindFile<CR>')
+local bind_opts = {'silent', 'override'}
+vimp.nnoremap(bind_opts, '<F3>', ':NvimTreeToggle<CR>')
+vimp.nnoremap(bind_opts, '<Leader><F3>', ':NvimTreeFindFile<CR>')

@@ -1,8 +1,9 @@
 local function load(use)
   use {'wbthomason/packer.nvim', opt = true}
 
-  -- lua config helpers
-  use {'svermeulen/vimpeccable'}
+  -- Some helpers
+  use 'svermeulen/vimpeccable'
+  use 'famiu/nvim-reload'
 
   -- UI and Visual plugins
   use 'lifepillar/vim-solarized8'
