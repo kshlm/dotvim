@@ -10,8 +10,11 @@ local on_attach = function(client, bufnr)
 
   -- Mappings.
   vimp.add_buffer_maps(bufnr, function()
-    local opts = {'silent'}
-    vimp.nnoremap(opts, 'gh', require'lspsaga.provider'.lsp_finder)
+    local opts = {'silent', 'override'}
+    vimp.nnoremap(opts, '<c-]>', lsp.buf.definition)
+    vimp.nnoremap(opts, 'gh', require'telescope.builtin'.lsp_references)
+    vimp.nnoremap(opts, 'g0', require'telescope.builtin'.lsp_document_symbols)
+    vimp.nnoremap(opts, 'gW', require'telescope.builtin'.lsp_workspace_symbols)
     vimp.nnoremap(opts, '<leader>ca', require'lspsaga.codeaction'.code_action)
     vimp.nnoremap(opts, 'K', require'lspsaga.hover'.render_hover_doc)
     vimp.nnoremap(opts, 'gs', require'lspsaga.signaturehelp'.signature_help)
@@ -47,6 +50,7 @@ local function setup_servers()
   local servers = {}
   vim.tbl_map(function(lang) servers[lang] = {} end, lspinstall.installed_servers())
 
+  -- Extend with manually installed servers and custom settings
   servers = vim.tbl_deep_extend('force', servers, {
     clangd = {},
     elixirls = {
@@ -99,11 +103,10 @@ local function setup_servers()
     lspconfig[lang].setup(make_config(config))
   end
 end
-
 setup_servers()
 
 -- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
-require'lspinstall'.post_install_hook = function ()
+lspinstall.post_install_hook = function ()
   setup_servers() -- reload installed servers
   vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
 end

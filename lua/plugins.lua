@@ -43,13 +43,24 @@ local function load(use)
   use 'vim-scripts/a.vim'
   use 'wellle/targets.vim'
 
+  --
   -- General dev plugins
-  use 'cohama/lexima.vim'
-  use 'hrsh7th/vim-vsnip'
+  --
+  -- Treesitter things
   use {
-    'hrsh7th/nvim-compe',
-    config = function() require 'cfg.compe' end,
+    'nvim-treesitter/nvim-treesitter',
+    run = ":TSUpdate",
+    config = function() require 'cfg.treesitter' end,
   }
+  use {
+    'romgrk/nvim-treesitter-context',
+    requires = 'nvim-treesitter/nvim-treesitter'
+  }
+  use {
+    'JoosepAlviste/nvim-ts-context-commentstring',
+    requires = 'nvim-treesitter/nvim-treesitter'
+  }
+  -- LSP things
   use 'kabouzeid/nvim-lspinstall'
   use 'glepnir/lspsaga.nvim'
   use {
@@ -65,34 +76,17 @@ local function load(use)
     requires = 'neovim/nvim-lspconfig',
     config = function() require'lspkind'.init() end,
   }
+  use 'folke/lsp-colors.nvim'
+  -- Others
+  use 'cohama/lexima.vim'
+  use 'hrsh7th/vim-vsnip'
   use {
-    'nvim-treesitter/nvim-treesitter',
-    run = ":TSUpdate",
-    config = function() require 'cfg.treesitter' end,
+    'hrsh7th/nvim-compe',
+    config = function() require 'cfg.compe' end,
   }
   use {
-    'romgrk/nvim-treesitter-context',
-    requires = 'nvim-treesitter/nvim-treesitter'
-  }
-
-  -- Go plugins
-  --[[ use {
-    'fatih/vim-go',
-    tag = 'v1.23',
-    run = ':GoInstallBinaries',
-    ft = {'go', 'gomod', 'gosum'}
-  } ]]
-
-  -- Rust plugins
-  use {
-    'rust-lang/rust.vim',
-    ft = 'rust'
-  }
-
-  -- Elixir plugins
-  use {
-    'elixir-lang/vim-elixir',
-    ft = 'elixir'
+    'windwp/nvim-ts-autotag',
+    config = function() require'nvim-ts-autotag'.setup() end,
   }
 
   -- Scala plugins
@@ -101,9 +95,6 @@ local function load(use)
     ft = {'scala', 'sbt'},
     config = function() require 'cfg.metals' end,
   }
-  -- Misc language and filetypes
-  use 'sheerun/vim-polyglot'
-
 end
 
 return function()
