@@ -33,10 +33,13 @@ local function load(use)
   use 'mhinz/vim-signify'
 
   -- Utility plugins
+  use 'b3nj5m1n/kommentary'
   use 'editorconfig/editorconfig-vim'
   use 'godlygeek/tabular'
-  use 'justinmk/vim-sneak'
-  use 'b3nj5m1n/kommentary'
+  use {
+    'justinmk/vim-sneak',
+    config = function() require 'cfg.sneak' end,
+  }
   use 'tpope/vim-dispatch'
   use 'tpope/vim-fugitive'
   use 'tpope/vim-repeat'
