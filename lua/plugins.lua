@@ -54,6 +54,16 @@ local function load(use)
     'neovim/nvim-lspconfig',
     config = function() require 'cfg.lsp' end,
   }
+  use {
+    'glepnir/lspsaga.nvim',
+    requires = 'neovim/nvim-lspconfig',
+    config = function() require 'cfg.lspsaga' end,
+  }
+  use {
+    'onsails/lspkind-nvim',
+    requires = 'neovim/nvim-lspconfig',
+    config = function() require'lspkind'.init() end,
+  }
   use 'anott03/nvim-lspinstall'
   use {
     'nvim-treesitter/nvim-treesitter',
@@ -66,12 +76,12 @@ local function load(use)
   }
 
   -- Go plugins
-  use {
+  --[[ use {
     'fatih/vim-go',
     tag = 'v1.23',
     run = ':GoInstallBinaries',
     ft = {'go', 'gomod', 'gosum'}
-  }
+  } ]]
 
   -- Rust plugins
   use {
@@ -95,7 +105,7 @@ local function load(use)
     config = function() require 'cfg.metals' end,
   }
   -- Misc language and filetypes
-  use 'sheerun/vim-polyglot'
+  -- use 'sheerun/vim-polyglot'
 
 end
 

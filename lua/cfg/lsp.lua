@@ -4,7 +4,7 @@ local lspconfig = require('lspconfig')
 local on_attach = function(client, bufnr)
   local opts = {noremap = true, silent = true}
   -- cf. :help lsp-config for tips on what to map
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "gh", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+  --[[ vim.api.nvim_buf_set_keymap(bufnr, "n", "gh", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "gH", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "gO", "<cmd>lua vim.lsp.buf.references()<CR><cmd>copen<CR>", opts)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
@@ -13,7 +13,7 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>lh", "<cmd>lua vim.lsp.buf.document_highlight()<CR>", opts)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>lH", "<cmd>lua init.clear_document_highlight()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>ld", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>ld", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts) ]]
 end
 
 local servers = {
@@ -25,12 +25,16 @@ local servers = {
     }
   },
   rust_analyzer = {},
+  zls = {},
 }
 for ls, settings in pairs(servers) do lspconfig[ls].setup{
-    on_attach = on_attach,
+    -- on_attach = on_attach,
     settings = settings,
   }
 end
+lspconfig.elixirls.setup {
+  cmd = { "/usr/bin/elixir-ls" },
+}
 
 -- lsp-diagnostic settings
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
@@ -40,4 +44,4 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     update_in_insert = false,
     virtual_text = true,
   }
-  )
+)
