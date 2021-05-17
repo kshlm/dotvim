@@ -1,5 +1,6 @@
-local compe = require "compe"
-local vimp = require "vimp"
+local compe = require("compe")
+local luasnip = require("luasnip")
+local vimp = require("vimp")
 
 compe.setup {
   enabled = true,
@@ -15,12 +16,11 @@ compe.setup {
   max_menu_width = 100,
 
   source = {
-    path = true,
-    buffer = true,
     calc = true,
+    luasnip = true,
     nvim_lsp = true,
     nvim_lua = true,
-    vsnip = true,
+    path = true,
   }
 }
 
@@ -55,23 +55,23 @@ end
 _G.compe = {}
 _G.compe.tab_complete = function()
   if vim.fn.pumvisible() == 1 then
-    return t "<C-n>"
-  elseif vim.fn.call("vsnip#available", {1}) == 1 then
-    return t "<Plug>(vsnip-expand-or-jump)"
+    return t("<C-n>")
+  elseif luasnip.expand_or_jumpable() then
+    return t("<Plug>luasnip-expand-or-jump")
   elseif check_back_space() then
-    return t "<Tab>"
+    return t("<Tab>")
   else
     return vim.fn['compe#complete']()
   end
 end
 _G.compe.s_tab_complete = function()
   if vim.fn.pumvisible() == 1 then
-    return t "<C-p>"
-  elseif vim.fn.call("vsnip#jumpable", {-1}) == 1 then
-    return t "<Plug>(vsnip-jump-prev)"
+    return t("<C-p>")
+  elseif luasnip.jumpable(-1) then
+    return t("<Plug>luasnip-jump-prev")
   else
-    return t "<S-Tab>"
+    return t("<S-Tab>")
   end
 end
-vimp.bind('is', bind_opts, '<Tab>', 'v:lua.compe.tab_complete()')
-vimp.bind('is', bind_opts, '<S-Tab>', 'v:lua.compe.s_tab_complete()')
+vimp.rbind('is', bind_opts, '<Tab>', 'v:lua.compe.tab_complete()')
+vimp.rbind('is', bind_opts, '<S-Tab>', 'v:lua.compe.s_tab_complete()')

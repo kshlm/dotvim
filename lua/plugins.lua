@@ -89,12 +89,13 @@ local function load(use)
 
   -- Others
   use {
-    'hrsh7th/vim-vsnip',
-    'hrsh7th/vim-vsnip-integ',
+    'L3MON4D3/LuaSnip',
+    requires = 'rafamadriz/friendly-snippets',
+    config = function() require('luasnip.loaders.from_vscode').load() end,
   }
   use {
     'hrsh7th/nvim-compe',
-    requires = {'hrsh7th/vim-vsnip', 'hrsh7th/vim-vsnip-integ'},
+    requires = 'L3MON4D3/LuaSnip',
     config = function() require('cfg.compe') end,
   }
   use {
@@ -131,5 +132,5 @@ return function()
     }
   })
 
-  vim.cmd [[autocmd BufWritePost plugins.lua PackerCompile]]
+  vim.cmd [[autocmd BufWritePost **/.config/nvim/lua/** PackerCompile]]
 end
