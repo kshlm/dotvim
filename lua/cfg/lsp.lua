@@ -30,17 +30,6 @@ local on_attach = function(client, bufnr)
       vimp.nnoremap(bind_opts, "<leader>f", lsp.buf.range_formatting)
     end
   end)
-
-  -- Set autocommands conditional on server_capabilities
-  if client.resolved_capabilities.document_highlight then
-    vim.api.nvim_exec([[
-    augroup lsp_document_highlight
-    autocmd! * <buffer>
-    autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-    autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-    augroup END
-    ]], false)
-  end
 end
 
 local function setup_servers()
