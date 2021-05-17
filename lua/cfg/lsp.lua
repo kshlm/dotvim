@@ -82,6 +82,10 @@ local function setup_servers()
     rust_analyzer = {},
     zls = {},
   })
+  if vim.fn.has('mac') then
+    servers.elixirls = nil
+    servers.clangd.cmd = {'/usr/local/opt/llvm/bin/clangd'}
+  end
 
   local make_config = function(config)
     local capabilities = vim.lsp.protocol.make_client_capabilities()
