@@ -11,7 +11,7 @@ local function load(use)
   -- UI and Visual plugins
   use {
     'ishan9299/nvim-solarized-lua',
-    config = function() require('cfg.reload') end
+    config = function() require('cfg.solarized') end
   }
   use {
     'hoob3rt/lualine.nvim',
@@ -88,10 +88,13 @@ local function load(use)
   }
 
   -- Others
-  use 'hrsh7th/vim-vsnip'
+  use {
+    'hrsh7th/vim-vsnip',
+    'hrsh7th/vim-vsnip-integ',
+  }
   use {
     'hrsh7th/nvim-compe',
-    requires = 'hrsh7th/vim-vsnip',
+    requires = {'hrsh7th/vim-vsnip', 'hrsh7th/vim-vsnip-integ'},
     config = function() require('cfg.compe') end,
   }
   use {
@@ -116,6 +119,17 @@ end
 return function()
   vim.cmd [[packadd packer.nvim]]
   local packer = require ('packer')
-  packer.startup({load})
+  packer.startup({
+    load,
+    config = {
+      display = {
+        open_fn = require('packer.util').float
+      },
+      profile = {
+        enable = true,
+      }
+    }
+  })
+
   vim.cmd [[autocmd BufWritePost plugins.lua PackerCompile]]
 end

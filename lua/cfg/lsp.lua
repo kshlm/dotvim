@@ -6,8 +6,6 @@ local saga = require('lspsaga')
 local vimp = require('vimp')
 
 local on_attach = function(client, bufnr)
-  vim.bo[bufnr].omnifunc = 'v:lua.vim.lsp.omnifunc'
-
   -- Mappings.
   vimp.add_buffer_maps(bufnr, function()
     local bind_opts = {'silent'}
