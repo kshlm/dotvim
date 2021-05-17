@@ -7,6 +7,7 @@ local function load(use)
     'famiu/nvim-reload',
     config = function() require('cfg.reload') end,
   }
+
   -- UI and Visual plugins
   use 'lifepillar/vim-solarized8'
   use {
@@ -49,9 +50,8 @@ local function load(use)
   use 'vim-scripts/a.vim'
   use 'wellle/targets.vim'
 
-  --
   -- General dev plugins
-  --
+
   -- Treesitter things
   use {
     'nvim-treesitter/nvim-treesitter',
@@ -66,6 +66,7 @@ local function load(use)
     'JoosepAlviste/nvim-ts-context-commentstring',
     requires = 'nvim-treesitter/nvim-treesitter'
   }
+
   -- LSP things
   use 'kabouzeid/nvim-lspinstall'
   use 'glepnir/lspsaga.nvim'
@@ -83,8 +84,8 @@ local function load(use)
     config = function() require('lspkind').init() end,
   }
   use 'folke/lsp-colors.nvim'
-  -- Others
 
+  -- Others
   use 'hrsh7th/vim-vsnip'
   use {
     'hrsh7th/nvim-compe',
@@ -101,7 +102,8 @@ local function load(use)
     config = function() require('nvim-ts-autotag').setup() end,
   }
 
-  -- Scala plugins
+  -- Language specific plugins
+  use 'elixir-editors/vim-elixir'
   use {
     'scalameta/nvim-metals',
     ft = {'scala', 'sbt'},
