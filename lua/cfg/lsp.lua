@@ -43,7 +43,20 @@ local function setup_servers()
     elixirls = {
       cmd = { "/usr/bin/elixir-ls" },
     },
-    gopls = {},
+    gopls = {
+      settings = {
+        gopls = {
+          analyses = {
+            nilness = true,
+            shadow = true,
+            unusedparams = true,
+          },
+          gofumpt = true,
+          staticcheck = true,
+          usePlaceholders = true,
+        }
+      }
+    },
     lua = {
       settings = {
         Lua = {
