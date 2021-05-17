@@ -9,7 +9,10 @@ local function load(use)
   }
 
   -- UI and Visual plugins
-  use 'lifepillar/vim-solarized8'
+  use {
+    'ishan9299/nvim-solarized-lua',
+    config = function() require('cfg.reload') end
+  }
   use {
     'hoob3rt/lualine.nvim',
     requires = {'kyazdani42/nvim-web-devicons'},
@@ -83,7 +86,6 @@ local function load(use)
     requires = 'neovim/nvim-lspconfig',
     config = function() require('lspkind').init() end,
   }
-  use 'folke/lsp-colors.nvim'
 
   -- Others
   use 'hrsh7th/vim-vsnip'

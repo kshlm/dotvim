@@ -3,12 +3,12 @@ require'plugins'()
 local set = require'utils'.set
 local vimp = require'vimp'
 
-vim.o.background = 'dark'
-vim.o.termguicolors = true
-vim.cmd [[
-  colorscheme solarized8
-  syntax on
-]]
+-- vim.o.background = 'dark'
+-- vim.o.termguicolors = true
+-- vim.cmd [[
+--   colorscheme solarized
+--   syntax on
+-- ]]
 
 local all_opts = {
   o = {
