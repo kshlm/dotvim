@@ -1,5 +1,4 @@
 local compe = require("compe")
-local luasnip = require("luasnip")
 local vimp = require("vimp")
 
 compe.setup {
@@ -17,10 +16,10 @@ compe.setup {
 
   source = {
     calc = true,
-    luasnip = true,
     nvim_lsp = true,
     nvim_lua = true,
     path = true,
+    vsnip = true,
   }
 }
 
@@ -56,8 +55,8 @@ _G.compe = {}
 _G.compe.tab_complete = function()
   if vim.fn.pumvisible() == 1 then
     return t("<C-n>")
-  elseif luasnip.expand_or_jumpable() then
-    return t("<Plug>luasnip-expand-or-jump")
+  elseif vim.fn.call("vsnip#available", {1}) == 1 then
+    return t("<Plug>(vsnip-expand-or-jump)")
   elseif check_back_space() then
     return t("<Tab>")
   else
@@ -67,8 +66,8 @@ end
 _G.compe.s_tab_complete = function()
   if vim.fn.pumvisible() == 1 then
     return t("<C-p>")
-  elseif luasnip.jumpable(-1) then
-    return t("<Plug>luasnip-jump-prev")
+  elseif vim.fn.call("vsnip#jumpable", {-1}) == 1 then
+    return t("<Plug>(vsnip-jump-prev)")
   else
     return t("<S-Tab>")
   end

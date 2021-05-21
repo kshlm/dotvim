@@ -36,7 +36,11 @@ local function load(use)
     },
     config = function() require('cfg.telescope') end,
   }
-  use 'mhinz/vim-signify'
+  use {
+    'lewis6991/gitsigns.nvim',
+    requires = { 'nvim-lua/plenary.nvim' },
+    config = function() require('gitsigns').setup() end,
+  }
 
   -- Utility plugins
   use 'b3nj5m1n/kommentary'
@@ -97,13 +101,17 @@ local function load(use)
 
   -- Others
   use {
-    'L3MON4D3/LuaSnip',
-    requires = 'rafamadriz/friendly-snippets',
-    config = function() require('luasnip.loaders.from_vscode').load() end,
+    'hrsh7th/vim-vsnip',
+    'hrsh7th/vim-vsnip-integ',
+    'rafamadriz/friendly-snippets',
   }
   use {
     'hrsh7th/nvim-compe',
-    requires = 'L3MON4D3/LuaSnip',
+    requires = {
+      'hrsh7th/vim-vsnip',
+      'hrsh7th/vim-vsnip-integ',
+      'rafamadriz/friendly-snippets',
+    },
     config = function() require('cfg.compe') end,
   }
   use {
@@ -141,9 +149,6 @@ return function()
   packer.startup({
     load,
     config = {
-      display = {
-        open_fn = require('packer.util').float
-      },
       profile = {
         enable = true,
       }
