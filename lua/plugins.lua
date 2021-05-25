@@ -17,7 +17,6 @@ local function load(use)
   use {
     'hoob3rt/lualine.nvim',
     requires = {'kyazdani42/nvim-web-devicons'},
-    config = function() require('cfg.lualine')() end,
   }
   use {
     'romgrk/barbar.nvim',

@@ -4,7 +4,7 @@ return function (mode)
   lualine.setup(
   {
     options = {
-      theme = 'solarized_'..(mode or "dark"),
+      theme = 'solarized_'..(mode or "light"),
     },
     sections = {
       lualine_a = { {'mode', upper = true} },

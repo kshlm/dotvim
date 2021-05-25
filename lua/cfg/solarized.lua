@@ -1,3 +1,4 @@
+local setup_lualine = require('cfg.lualine')
 if vim.fn.has('mac') then
   require('dark_notify').run(
     {
@@ -6,6 +7,7 @@ if vim.fn.has('mac') then
   )
 else
   vim.o.background = 'light'
+  setup_lualine()
 end
 vim.o.termguicolors = true
 vim.cmd [[
