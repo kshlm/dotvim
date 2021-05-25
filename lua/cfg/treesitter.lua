@@ -5,6 +5,7 @@ require'nvim-treesitter.configs'.setup {
   ensure_installed = 'maintained',
   highlight = { enable = true },
   incremental_selection = { enable = true },
+  indent = { enable = true },
   refactor = {
     highlight_definitions = { enable = true },
     smart_rename = { enable = true },
