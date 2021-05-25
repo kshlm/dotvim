@@ -40,9 +40,6 @@ local function setup_servers()
   -- Extend with manually installed servers and custom settings
   servers = vim.tbl_deep_extend('force', servers, {
     clangd = {},
-    elixirls = {
-      cmd = { "/usr/bin/elixir-ls" },
-    },
     gopls = {
       settings = {
         gopls = {
@@ -83,7 +80,6 @@ local function setup_servers()
     zls = {},
   })
   if vim.fn.has('mac') then
-    servers.elixirls = nil
     servers.clangd.cmd = {'/usr/local/opt/llvm/bin/clangd'}
   end
 
