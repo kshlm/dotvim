@@ -1,4 +1,5 @@
-require'plugins'()
+require('bootstrap')
+require('plugins')()
 
 local set = require'utils'.set
 local vimp = require'vimp'
