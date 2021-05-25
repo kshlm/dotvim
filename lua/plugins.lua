@@ -119,6 +119,16 @@ local function load(use)
     ft = {'scala', 'sbt'},
     config = function() require('cfg.metals') end,
   }
+  use {
+    'simrat39/rust-tools.nvim',
+    ft = {'rust'},
+    config = function() require('rust-tools').setup() end,
+  }
+  use {
+    'ray-x/go.nvim',
+    ft = {'go', 'go.mod'},
+    config = function() require('cfg.go') end,
+  }
 end
 
 return function()
