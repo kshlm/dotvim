@@ -11,12 +11,13 @@ local function load(use)
   -- UI and Visual plugins
   use {
     'ishan9299/nvim-solarized-lua',
+    requires = vim.fn.has('mac') == 1 and {'cormacrelf/dark-notify'} or {},
     config = function() require('cfg.solarized') end
   }
   use {
     'hoob3rt/lualine.nvim',
     requires = {'kyazdani42/nvim-web-devicons'},
-    config = function() require('cfg.lualine') end,
+    config = function() require('cfg.lualine')() end,
   }
   use {
     'romgrk/barbar.nvim',

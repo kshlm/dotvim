@@ -1,8 +1,10 @@
 local lualine = require 'lualine'
-lualine.setup(
+
+return function (mode)
+  lualine.setup(
   {
     options = {
-      theme = 'solarized_dark',
+      theme = 'solarized_'..(mode or "dark"),
     },
     sections = {
       lualine_a = { {'mode', upper = true} },
@@ -13,4 +15,5 @@ lualine.setup(
       lualine_z = { 'progress', 'location'  },
     },
   }
-)
+  )
+end
