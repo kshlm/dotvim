@@ -17,6 +17,7 @@ local all_opts = {
     showmatch = true,
     smartcase = true,
     smarttab = true,
+    title = true,
     wildmenu = true,
     wildmode = "full",
   },
