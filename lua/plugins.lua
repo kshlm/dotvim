@@ -67,6 +67,10 @@ local function load(use)
     requires = 'nvim-treesitter/nvim-treesitter'
   }
   use {
+    'haringsrob/nvim_context_vt',
+    requires = 'nvim-treesitter/nvim-treesitter'
+  }
+  use {
     'JoosepAlviste/nvim-ts-context-commentstring',
     requires = 'nvim-treesitter/nvim-treesitter'
   }
