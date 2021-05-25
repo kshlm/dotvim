@@ -90,6 +90,10 @@ local function load(use)
     requires = 'neovim/nvim-lspconfig',
     config = function() require('lspkind').init() end,
   }
+  use {
+    'simrat39/symbols-outline.nvim',
+    requires = 'neovim/nvim-lspconfig',
+  }
 
   -- Others
   use {
