@@ -1,8 +1,8 @@
 require('bootstrap')
 require('plugins')()
 
-local set = require'utils'.set
-local vimp = require'vimp'
+local set = require('utils').set
+local vimp = require('vimp')
 
 local all_opts = {
   o = {

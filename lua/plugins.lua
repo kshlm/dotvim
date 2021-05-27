@@ -77,6 +77,8 @@ local function load(use)
     'JoosepAlviste/nvim-ts-context-commentstring',
     requires = 'nvim-treesitter/nvim-treesitter'
   }
+  -- Polyglot for everything else
+  use 'sheerun/vim-polyglot'
 
   -- LSP things
   use 'kabouzeid/nvim-lspinstall'
@@ -128,7 +130,6 @@ local function load(use)
   use 'elixir-editors/vim-elixir'
   use {
     'scalameta/nvim-metals',
-    ft = {'scala', 'sbt'},
     config = function() require('cfg.metals') end,
   }
   use {
