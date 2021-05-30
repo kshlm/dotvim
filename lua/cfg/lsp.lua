@@ -56,6 +56,7 @@ local function setup_servers()
   if vim.fn.has('mac') then
     servers.clangd.cmd = {'/usr/local/opt/llvm/bin/clangd'}
     servers.rnix = {}
+    servers.pylsp = {}
   end
 
   local make_config = function(config)
