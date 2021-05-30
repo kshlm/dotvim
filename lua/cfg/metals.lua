@@ -4,7 +4,7 @@ local lsputils = require('cfg.lsputils')
 _G.metals = {}
 _G.metals.initialize_or_attach = function()
   -- Remove 'F' from shortmess for metals to work correctly
-  vim.o.shortmess = string.gsub(vim.o.shortmess, "F", "")
+  vim.opt.shortmess = vim.opt.shortmess - 'F'
 
   local metals_config = metals.bare_config
   metals_config.init_options.statusBarProvider = 'on'

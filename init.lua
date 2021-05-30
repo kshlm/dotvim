@@ -1,48 +1,34 @@
 require('bootstrap')
 require('plugins')()
 
-local set = require('utils').set
 local vimp = require('vimp')
 
-local all_opts = {
-  o = {
-    backup = false,
-    hidden = true,
-    hlsearch = true,
-    ignorecase = true,
-    incsearch = true,
-    mouse = 'a',
-    ruler = true,
-    scrolloff = 5,
-    shortmess = vim.o.shortmess..'c',
-    showmatch = true,
-    smartcase = true,
-    smarttab = true,
-    title = true,
-    wildmenu = true,
-    wildmode = "full",
-  },
-  b = {
-    autoindent = true,
-    expandtab = true,
-    shiftwidth = 2,
-    smartindent = true,
-    tabstop = 2,
-  },
-  w = {
-    colorcolumn = '80,120',
-    foldenable = false,
-    foldexpr='nvim_treesitter#foldexpr()',
-    foldmethod = 'expr',
-    number = true,
-    relativenumber = true,
-  },
-}
-for scope, opts in pairs(all_opts) do
-  for opt, val in pairs(opts) do
-    set(scope, opt, val)
-  end
-end
+vim.opt.autoindent = true
+vim.opt.backup = false
+vim.opt.colorcolumn = {'80', '120'}
+vim.opt.expandtab = true
+vim.opt.foldenable = false
+vim.opt.foldexpr='nvim_treesitter#foldexpr()'
+vim.opt.foldmethod = 'expr'
+vim.opt.hidden = true
+vim.opt.hlsearch = true
+vim.opt.ignorecase = true
+vim.opt.incsearch = true
+vim.opt.mouse = 'a'
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.ruler = true
+vim.opt.scrolloff = 5
+vim.opt.shiftwidth = 2
+vim.opt.shortmess = vim.opt.shortmess + 'c'
+vim.opt.showmatch = true
+vim.opt.smartcase = true
+vim.opt.smartindent = true
+vim.opt.smarttab = true
+vim.opt.tabstop = 2
+vim.opt.title = true
+vim.opt.wildmenu = true
+vim.opt.wildmode = "full"
 
 vimp.bind('nvo', {'silent'}, '<F2>', [[:nohl<CR>]])
 vimp.tnoremap({'silent'}, '<Esc>', [[<C-\><C-n>]])
