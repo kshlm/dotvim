@@ -4,7 +4,13 @@ local vimp = require('vimp')
 local M = {}
 
 M.on_attach = function(client, bufnr)
-  -- Mappings.
+  -- Only set the mappings once
+  if vim.b.lsp_bindings_set then
+    return
+  end
+  vim.b.lsp_bindings_set = true
+
+  -- Mappings
   vimp.add_buffer_maps(bufnr, function()
     local bind_opts = {'silent'}
     vimp.nnoremap(bind_opts, '<c-]>', lsp.buf.definition)
