@@ -102,6 +102,9 @@ saga.init_lsp_saga(
   {
     code_action_prompt = {
       sign = false,
+    },
+    code_action_keys = {
+      quit = '<Esc>',
     }
   }
 )
