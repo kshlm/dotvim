@@ -50,7 +50,15 @@ local function setup_servers()
         }
       }
     },
-    rust_analyzer = {},
+    rust_analyzer = {
+      settings = {
+        ["rust-analyzer"] = {
+          checkOnSave = {
+            command = "clippy",
+          }
+        }
+      }
+    },
     zls = {},
   })
   if vim.fn.has('mac') then
