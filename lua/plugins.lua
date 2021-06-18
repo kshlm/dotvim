@@ -12,12 +12,7 @@ local function load(use)
   use {
     'git@github.com:kshlm/dracula-pro.git',
     rtp = "vim",
-    config = function()
-      vim.cmd [[
-      colorscheme dracula_pro
-      syntax on
-      ]]
-    end,
+    config = function() require('cfg.dracula_pro') end,
   }
   use {
     'hoob3rt/lualine.nvim',
