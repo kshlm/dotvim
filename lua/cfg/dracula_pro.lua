@@ -4,7 +4,11 @@ vim.cmd [[
   syntax on
 ]]
 
--- Customize GitSigns (taken from the normal Dracula theme)
+-- Customize GitSigns and Treesitter highlights
+-- Taken from the normal Dracula theme https://github.com/dracula/vim/blob/master/after/plugin/dracula.vim
+-- License: https://github.com/dracula/vim/blob/master/LICENSE
+
+-- gitsigns
 vim.cmd [[
   hi! link GitSignsAdd      DiffAdd
   hi! link GitSignsAddLn    DiffAdd
@@ -17,7 +21,7 @@ vim.cmd [[
   hi! link GitSignsDeleteNr DiffDelete
 ]]
 
--- Customize Treesitter highlights (taken from the normal Dracula theme)
+-- treesitter
 vim.cmd [[
   " # Misc
   hi! link TSPunctSpecial Special
