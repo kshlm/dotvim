@@ -4,6 +4,7 @@ require('plugins')()
 local vimp = require('vimp')
 
 vim.opt.autoindent = true
+vim.opt.background = 'dark'
 vim.opt.backup = false
 vim.opt.colorcolumn = {'80', '120'}
 vim.opt.expandtab = true
@@ -26,6 +27,7 @@ vim.opt.smartcase = true
 vim.opt.smartindent = true
 vim.opt.smarttab = true
 vim.opt.tabstop = 2
+vim.opt.termguicolors = true
 vim.opt.title = true
 vim.opt.wildmenu = true
 vim.opt.wildmode = "full"

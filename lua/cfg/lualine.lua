@@ -1,10 +1,10 @@
 local lualine = require 'lualine'
 
-return function (mode)
+return function (theme)
   lualine.setup(
   {
     options = {
-      theme = 'solarized_'..(mode or "light"),
+      theme = theme or "dracula",
     },
     sections = {
       lualine_a = { {'mode', upper = true} },
