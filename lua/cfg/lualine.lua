@@ -3,6 +3,7 @@ local lualine = require 'lualine'
 return function (theme)
   lualine.setup(
   {
+    extensions = {'nvim-tree', 'quickfix'},
     options = {
       theme = theme or "dracula",
     },

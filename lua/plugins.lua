@@ -47,10 +47,7 @@ local function load(use)
   use 'b3nj5m1n/kommentary'
   use 'editorconfig/editorconfig-vim'
   use 'godlygeek/tabular'
-  use {
-    'justinmk/vim-sneak',
-    config = function() require('cfg.sneak') end,
-  }
+  use 'ggandor/lightspeed.nvim'
   use 'tpope/vim-dispatch'
   use 'tpope/vim-fugitive'
   use 'tpope/vim-repeat'
