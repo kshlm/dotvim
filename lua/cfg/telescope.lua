@@ -5,7 +5,6 @@ local vimp = require 'vimp'
 local cfg = {
   color_devicons = true,
   layout_strategy = 'flex',
-  prompt_position = 'top',
   scroll_strategy = 'cycle',
   shorten_path = true,
   sorting_strategy = 'ascending',

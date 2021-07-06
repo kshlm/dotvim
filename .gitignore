@@ -1,5 +1,5 @@
 bundle/*
 .netrwhist
 pack/*
-plugin/packer_compiled.vim
+plugin/packer_compiled.*
 *.bak
