@@ -5,8 +5,8 @@ local vimp = require 'vimp'
 local cfg = {
   color_devicons = true,
   layout_strategy = 'flex',
+  path_display = {'shorten'},
   scroll_strategy = 'cycle',
-  shorten_path = true,
   sorting_strategy = 'ascending',
 }
 telescope.setup {defaults = cfg}
