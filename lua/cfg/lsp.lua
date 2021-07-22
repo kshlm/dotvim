@@ -63,7 +63,20 @@ local function setup_servers()
   })
   if vim.fn.has('mac') == 1 then
     servers.clangd.cmd = {'/usr/local/opt/llvm/bin/clangd'}
-    servers.pylsp = {}
+    servers.pylsp = {
+      settings = {
+        pylsp = {
+          plugins = {
+            jedi_completion = {enabled = false},
+            jedi_definition = {enabled = false},
+            jedi_hover = {enabled = false},
+            jedi_references = {enabled = false},
+            jedi_symbols = {enabled = false},
+            pylsp_mypy = {enabled = false},
+          }
+        }
+      }
+    }
   end
 
   local make_config = function(config)
