@@ -61,42 +61,13 @@ local function setup_servers()
     },
     zls = {},
   })
+
   if vim.fn.has('mac') == 1 then
     servers.clangd.cmd = {'/usr/local/opt/llvm/bin/clangd'}
-    servers.pylsp = {
-      settings = {
-        pylsp = {
-          plugins = {
-            jedi_completion = {enabled = false},
-            jedi_definition = {enabled = false},
-            jedi_hover = {enabled = false},
-            jedi_references = {enabled = false},
-            jedi_symbols = {enabled = false},
-            pylsp_mypy = {enabled = false},
-          }
-        }
-      }
-    }
-  end
-
-  local make_config = function(config)
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities.textDocument.completion.completionItem.snippetSupport = true
-    capabilities.textDocument.completion.completionItem.resolveSupport = {
-      properties = {
-        'documentation',
-        'detail',
-        'additionalTextEdits',
-      }
-    }
-    return vim.tbl_extend('error', {
-      capabilities = capabilities,
-      on_attach = lsputils.on_attach,
-    }, config)
   end
 
   for lang, config in pairs(servers) do
-    lspconfig[lang].setup(make_config(config))
+    lspconfig[lang].setup(lsputils.make_config(config))
   end
 end
 setup_servers()

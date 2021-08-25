@@ -3,7 +3,7 @@ local vimp = require('vimp')
 
 local M = {}
 
-M.on_attach = function(client, bufnr)
+local on_attach = function(client, bufnr)
   -- Only set the mappings once
   if vim.b.lsp_bindings_set then
     return
@@ -32,6 +32,22 @@ M.on_attach = function(client, bufnr)
       vimp.nnoremap(bind_opts, "<leader>f", lsp.buf.range_formatting)
     end
   end)
+end
+
+M.make_config = function(config)
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
+  capabilities.textDocument.completion.completionItem.resolveSupport = {
+    properties = {
+      'documentation',
+      'detail',
+      'additionalTextEdits',
+    }
+  }
+  return vim.tbl_extend('error', {
+    capabilities = capabilities,
+    on_attach = on_attach,
+  }, config)
 end
 
 return M

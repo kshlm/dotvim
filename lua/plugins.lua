@@ -98,6 +98,14 @@ local function load(use)
     'simrat39/symbols-outline.nvim',
     requires = 'neovim/nvim-lspconfig',
   }
+  use {
+    'jose-elias-alvarez/null-ls.nvim',
+    requires = {
+      'neovim/nvim-lspconfig',
+      'nvim-lua/plenary.nvim',
+    },
+    config = function() require('cfg.null-ls') end,
+  }
 
   -- Others
   use {
