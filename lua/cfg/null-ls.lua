@@ -3,15 +3,18 @@ local lspconfig = require("lspconfig")
 local lsputils = require("cfg.lsputils")
 
 local sources = {
+	-- Code Actions
 	null_ls.builtins.code_actions.gitsigns,
+	-- Diagnostics
 	null_ls.builtins.diagnostics.selene,
+	-- Formatting
 	null_ls.builtins.formatting.black,
 	null_ls.builtins.formatting.gofumpt,
 	null_ls.builtins.formatting.isort,
 	null_ls.builtins.formatting.prettier,
 	null_ls.builtins.formatting.shellharden,
 	null_ls.builtins.formatting.shfmt,
-	null_ls.builtins.formatting.sytlua,
+	null_ls.builtins.formatting.stylua,
 	null_ls.builtins.formatting.terraform_fmt,
 }
 
