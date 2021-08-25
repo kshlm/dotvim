@@ -1,15 +1,15 @@
 -- Set the colorscheme to Dracula Pro and customize highlights
-vim.cmd [[
+vim.cmd([[
   colorscheme dracula_pro
   syntax on
-]]
+]])
 
 -- Customize GitSigns and Treesitter highlights
 -- Taken from the normal Dracula theme https://github.com/dracula/vim/blob/master/after/plugin/dracula.vim
 -- License: https://github.com/dracula/vim/blob/master/LICENSE
 
 -- gitsigns
-vim.cmd [[
+vim.cmd([[
   hi! link GitSignsAdd      DiffAdd
   hi! link GitSignsAddLn    DiffAdd
   hi! link GitSignsAddNr    DiffAdd
@@ -19,10 +19,10 @@ vim.cmd [[
   hi! link GitSignsDelete   DiffDelete
   hi! link GitSignsDeleteLn DiffDelete
   hi! link GitSignsDeleteNr DiffDelete
-]]
+]])
 
 -- treesitter
-vim.cmd [[
+vim.cmd([[
   " # Misc
   hi! link TSPunctSpecial Special
   " # Constants
@@ -49,4 +49,4 @@ vim.cmd [[
   hi! link TSTitle DraculaYellow
   hi! link TSLiteral DraculaYellow
   hi! link TSURI DraculaYellow
-]]
+]])
