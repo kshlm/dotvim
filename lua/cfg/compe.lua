@@ -1,5 +1,5 @@
 local compe = require("compe")
-local vimp = require("vimp")
+local mapx = require("mapx")
 
 compe.setup({
 	enabled = true,
@@ -27,12 +27,13 @@ compe.setup({
 vim.o.completeopt = "menu,menuone,noselect"
 
 -- Mappings
-local bind_opts = { "expr", "silent" }
-vimp.inoremap(bind_opts, "<C-Space>", [[ compe#complete() ]])
--- vimp.inoremap(bind_opts, '<CR>', [[ compe#confirm('<CR>') ]]) -- Defined in cfg.autopairs
-vimp.inoremap(bind_opts, "<C-e>", [[ compe#close('<C-e>) ]])
-vimp.inoremap(bind_opts, "<C-f>", [[ compe#scroll({ 'delta': +4 }) ]])
-vimp.inoremap(bind_opts, "<C-d>", [[ compe#scroll({ 'delta': -4 }) ]])
+local bind_opts = { expr = true, silent = true }
+mapx.group(bind_opts, function()
+	mapx.inoremap("<C-Space>", [[ compe#complete() ]])
+	mapx.inoremap("<C-e>", [[ compe#close('<C-e>) ]])
+	mapx.inoremap("<C-f>", [[ compe#scroll({ 'delta': +4 }) ]])
+	mapx.inoremap("<C-d>", [[ compe#scroll({ 'delta': -4 }) ]])
+end)
 
 -- Use <Tab> <S-Tab> to navigate completions and snippets
 local t = function(str)
@@ -51,8 +52,7 @@ end
 -- Use (s-)tab to:
 --- move to prev/next item in completion menuone
 --- jump to prev/next snippet's placeholder
-_G.compe = {}
-_G.compe.tab_complete = function()
+local tab_complete = function()
 	if vim.fn.pumvisible() == 1 then
 		return t("<C-n>")
 	elseif vim.fn.call("vsnip#available", { 1 }) == 1 then
@@ -63,7 +63,7 @@ _G.compe.tab_complete = function()
 		return vim.fn["compe#complete"]()
 	end
 end
-_G.compe.s_tab_complete = function()
+local s_tab_complete = function()
 	if vim.fn.pumvisible() == 1 then
 		return t("<C-p>")
 	elseif vim.fn.call("vsnip#jumpable", { -1 }) == 1 then
@@ -72,5 +72,9 @@ _G.compe.s_tab_complete = function()
 		return t("<S-Tab>")
 	end
 end
-vimp.rbind("is", bind_opts, "<Tab>", "v:lua.compe.tab_complete()")
-vimp.rbind("is", bind_opts, "<S-Tab>", "v:lua.compe.s_tab_complete()")
+mapx.group(bind_opts, function()
+	mapx.imap("<Tab>", tab_complete)
+	mapx.smap("<Tab>", tab_complete)
+	mapx.imap("<S-Tab>", s_tab_complete)
+	mapx.smap("<S-Tab>", s_tab_complete)
+end)

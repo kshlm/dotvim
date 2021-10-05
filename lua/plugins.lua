@@ -3,6 +3,7 @@ local function load(use)
 
 	-- Some helpers
 	use("svermeulen/vimpeccable")
+	use("b0o/mapx.lua")
 	use({
 		"famiu/nvim-reload",
 		config = function()
@@ -124,6 +125,13 @@ local function load(use)
 		},
 		config = function()
 			require("cfg.null-ls")
+		end,
+	})
+	use({
+		"folke/trouble.nvim",
+		requires = "neovim/nvim-lspconfig",
+		config = function()
+			require("cfg.trouble")
 		end,
 	})
 

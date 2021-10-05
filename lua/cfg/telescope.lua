@@ -1,6 +1,6 @@
 local telescope = require("telescope")
 local builtin = require("telescope.builtin")
-local vimp = require("vimp")
+local mapx = require("mapx")
 
 local cfg = {
 	color_devicons = true,
@@ -11,8 +11,9 @@ local cfg = {
 }
 telescope.setup({ defaults = cfg })
 
-local bind_opts = { "silent" }
-vimp.nnoremap(bind_opts, "<C-p>", builtin.find_files)
-vimp.nnoremap(bind_opts, "<C-b>", builtin.buffers)
-vimp.nnoremap(bind_opts, "<leader>rg", builtin.live_grep)
-vimp.nnoremap(bind_opts, "ts", builtin.builtin)
+mapx.group({ silent = true }, function()
+	mapx.nnoremap("<C-p>", function() builtin.find_files() end)
+	mapx.nnoremap("<C-b>", function() builtin.buffers() end)
+	mapx.nnoremap("<leader>rg", function() builtin.live_grep() end)
+	mapx.nnoremap("ts", function() builtin.builtin() end)
+end)
