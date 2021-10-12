@@ -95,7 +95,7 @@ local function load(use)
 
 	-- LSP things
 	use("kabouzeid/nvim-lspinstall")
-	use("glepnir/lspsaga.nvim")
+	use("tami5/lspsaga.nvim")
 	use({
 		"neovim/nvim-lspconfig",
 		requires = {

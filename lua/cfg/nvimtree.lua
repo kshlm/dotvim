@@ -13,7 +13,9 @@ vim.g.nvim_tree_quit_on_open = 1
 
 nvimtree.setup {
 	auto_close = true,
-	lsp_diagnostics = true,
+	diagnostics = {
+		enabled = true
+	},
 	update_focused_file = {
 		enabled = true,
 	},
