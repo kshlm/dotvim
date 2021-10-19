@@ -6,7 +6,7 @@ _G.metals.initialize_or_attach = function()
 	-- Remove 'F' from shortmess for metals to work correctly
 	vim.opt.shortmess = vim.opt.shortmess - "F"
 
-	local metals_config = metals.bare_config
+	local metals_config = metals.bare_config()
 	metals_config.init_options.statusBarProvider = "on"
 	metals_config.on_attach = lsputils.on_attach
 

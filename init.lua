@@ -42,6 +42,7 @@ vim.cmd([[
 vim.cmd([[
   autocmd BufNewFile,BufRead Vagrantfile set filetype=ruby
   autocmd BufRead,BufNewFile zsh* set filetype=zsh
+  autocmd BufRead,BufNewFile *dockerfile set filetype=dockerfile
 ]])
 
 -- OS specific settings
