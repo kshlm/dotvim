@@ -95,12 +95,16 @@ local function load(use)
 
 	-- LSP things
 	use("kabouzeid/nvim-lspinstall")
-	use("tami5/lspsaga.nvim")
+	use({
+		"tami5/lspsaga.nvim",
+		branch = "nvim51",
+	})
 	use({
 		"neovim/nvim-lspconfig",
 		requires = {
 			"kabouzeid/nvim-lspinstall",
-			"glepnir/lspsaga.nvim",
+			"tami5/lspsaga.nvim",
+			"ms-jpq/coq_nvim",
 		},
 		config = function()
 			require("cfg.lsp")
@@ -137,24 +141,25 @@ local function load(use)
 
 	-- Others
 	use({
-		"hrsh7th/vim-vsnip",
-		"hrsh7th/vim-vsnip-integ",
-		"rafamadriz/friendly-snippets",
+		"ms-jpq/coq_nvim",
+		branch = "coq",
 	})
 	use({
-		"hrsh7th/nvim-compe",
-		requires = {
-			"hrsh7th/vim-vsnip",
-			"hrsh7th/vim-vsnip-integ",
-			"rafamadriz/friendly-snippets",
-		},
+		"ms-jpq/coq.artifacts",
+		branch = "artifacts",
+	})
+	use({
+		"ms-jpq/coq.thirdparty",
+		branch = "3p",
 		config = function()
-			require("cfg.compe")
+			require("coq_3p")({
+				{ src = "nvimlua", short_name = "nLUA" },
+			})
 		end,
 	})
 	use({
 		"windwp/nvim-autopairs",
-		requires = "hrsh7th/nvim-compe",
+		requires = "ms-jpq/coq_nvim",
 		config = function()
 			require("cfg.autopairs")
 		end,

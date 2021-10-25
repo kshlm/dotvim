@@ -1,5 +1,7 @@
 local lsp = require("vim.lsp")
 local mapx = require("mapx")
+local _ = require("cfg.coq")
+local coq = require("coq")
 
 local M = {}
 
@@ -57,10 +59,11 @@ M.make_config = function(config)
 			"additionalTextEdits",
 		},
 	}
-	return vim.tbl_extend("error", {
+	config = vim.tbl_extend("error", {
 		capabilities = capabilities,
 		on_attach = on_attach,
 	}, config)
+	return coq.lsp_ensure_capabilities(config)
 end
 
 return M

@@ -4,7 +4,7 @@ local lsputils = require("cfg.lsputils")
 
 local sources = {
 	-- Diagnostics
-	null_ls.builtins.diagnostics.selene,
+	-- null_ls.builtins.diagnostics.selene,
 	null_ls.builtins.diagnostics.shellcheck,
 	-- Formatting
 	null_ls.builtins.formatting.black,
