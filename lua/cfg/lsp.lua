@@ -1,20 +1,10 @@
 -- All LSP related config goes here
 local lspconfig = require("lspconfig")
-local lspinstall = require("lspinstall")
 local saga = require("lspsaga")
 local lsputils = require("cfg.lsputils")
 
 local function setup_servers()
-	lspinstall.setup()
-
-	-- Add the servers installed by LspInstall first
-	local servers = {}
-	vim.tbl_map(function(lang)
-		servers[lang] = {}
-	end, lspinstall.installed_servers())
-
-	-- Extend with manually installed servers and custom settings
-	servers = vim.tbl_deep_extend("force", servers, {
+	servers = {
 		clangd = {},
 		gopls = {
 			settings = {
@@ -52,6 +42,7 @@ local function setup_servers()
 				},
 			},
 		},
+		zls = {},
 		rust_analyzer = {
 			settings = {
 				["rust-analyzer"] = {
@@ -61,8 +52,8 @@ local function setup_servers()
 				},
 			},
 		},
-		zls = {},
-	})
+		rnix = {},
+	}
 
 	if vim.fn.has("mac") == 1 then
 		servers.clangd.cmd = { "/usr/local/opt/llvm/bin/clangd" }
@@ -73,12 +64,6 @@ local function setup_servers()
 	end
 end
 setup_servers()
-
--- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
-lspinstall.post_install_hook = function()
-	setup_servers() -- reload installed servers
-	vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
-end
 
 -- lsp-diagnostic settings
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {

@@ -5,7 +5,6 @@ vim.cmd([[ highlight link NvimTreeFolderName Title ]])
 vim.cmd([[ highlight link NvimTreeFolderIcon Tag ]])
 
 vim.g.nvim_tree_add_trailing = 1
-vim.g.nvim_tree_gitignore = 1
 vim.g.nvim_tree_git_hl = 1
 vim.g.nvim_tree_group_empty = 1
 vim.g.nvim_tree_indent_markers = 1
@@ -15,6 +14,9 @@ nvimtree.setup {
 	auto_close = true,
 	diagnostics = {
 		enabled = true
+	},
+	git = {
+		ignore = true
 	},
 	update_focused_file = {
 		enabled = true,

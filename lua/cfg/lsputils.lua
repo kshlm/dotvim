@@ -44,8 +44,8 @@ local on_attach = function(client, bufnr)
 		mapx.nnoremap("gR", require("lspsaga.rename").rename)
 		mapx.nnoremap("gd", require("lspsaga.provider").preview_definition)
 		mapx.nnoremap("<leader>cd", require("lspsaga.diagnostic").show_line_diagnostics)
-		mapx.nnoremap("]e", require("lspsaga.diagnostic").lsp_jump_diagnostic_next)
-		mapx.nnoremap("[e", require("lspsaga.diagnostic").lsp_jump_diagnostic_prev)
+		mapx.nnoremap("]e", require("lspsaga.diagnostic").navigate("next"))
+		mapx.nnoremap("[e", require("lspsaga.diagnostic").navigate("prev"))
 	end)
 end
 

@@ -13,7 +13,7 @@ local function load(use)
 
 	-- UI and Visual plugins
 	use({
-		"git@github.com:kshlm/dracula-pro.git",
+		"https://github.com/kshlm/dracula-pro.git",
 		rtp = "vim",
 		config = function()
 			require("cfg.dracula_pro")
@@ -94,15 +94,17 @@ local function load(use)
 	use("sheerun/vim-polyglot")
 
 	-- LSP things
-	use("kabouzeid/nvim-lspinstall")
 	use({
-		"tami5/lspsaga.nvim",
-		branch = "nvim51",
+		"williamboman/nvim-lsp-installer",
+		config = function()
+			require("cfg.lspinstaller")
+		end
 	})
+	use("tami5/lspsaga.nvim")
 	use({
 		"neovim/nvim-lspconfig",
 		requires = {
-			"kabouzeid/nvim-lspinstall",
+			"williamboman/nvim-lsp-installer",
 			"tami5/lspsaga.nvim",
 			"ms-jpq/coq_nvim",
 		},
