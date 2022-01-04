@@ -1,11 +1,13 @@
 local null_ls = require("null-ls")
-local lspconfig = require("lspconfig")
 local lsputils = require("cfg.lsputils")
 
 local sources = {
 	-- Diagnostics
+	null_ls.builtins.diagnostics.codespell,
+	-- null_ls.builtins.diagnostics.editorconfig_checker,
 	-- null_ls.builtins.diagnostics.selene,
 	null_ls.builtins.diagnostics.shellcheck,
+
 	-- Formatting
 	null_ls.builtins.formatting.black,
 	null_ls.builtins.formatting.gofumpt,
@@ -17,8 +19,9 @@ local sources = {
 	null_ls.builtins.formatting.stylua,
 	null_ls.builtins.formatting.surface,
 	null_ls.builtins.formatting.terraform_fmt,
+
+	-- Code Actions
+	null_ls.builtins.code_actions.gitsigns
 }
 
-null_ls.config({ sources = sources })
-
-lspconfig["null-ls"].setup(lsputils.make_config({}))
+null_ls.setup(lsputils.make_config({ sources = sources }))
