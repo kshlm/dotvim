@@ -1,7 +1,6 @@
 local lsp = require("vim.lsp")
 local mapx = require("mapx")
-local _ = require("cfg.coq")
-local coq = require("coq")
+local cmp = require("cmp_nvim_lsp")
 
 local M = {}
 
@@ -60,10 +59,10 @@ M.make_config = function(config)
 		},
 	}
 	config = vim.tbl_extend("error", {
-		capabilities = capabilities,
+		capabilities = cmp.update_capabilities(capabilities),
 		on_attach = on_attach,
 	}, config)
-	return coq.lsp_ensure_capabilities(config)
+	return config
 end
 
 return M
