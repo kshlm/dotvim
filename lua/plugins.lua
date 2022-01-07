@@ -106,7 +106,7 @@ local function load(use)
 		requires = {
 			"williamboman/nvim-lsp-installer",
 			"tami5/lspsaga.nvim",
-			"ms-jpq/coq_nvim",
+			"hrsh7th/cmp-nvim-lsp",
 		},
 		config = function()
 			require("cfg.lsp")
@@ -143,21 +143,18 @@ local function load(use)
 
 	-- Others
 	use({
-		"ms-jpq/coq_nvim",
-		branch = "coq",
-	})
-	use({
-		"ms-jpq/coq.artifacts",
-		branch = "artifacts",
-	})
-	use({
-		"ms-jpq/coq.thirdparty",
-		branch = "3p",
+		"hrsh7th/nvim-cmp",
+		requires = {
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-cmdline",
+			"hrsh7th/cmp-path",
+			"L3MON4D3/LuaSnip",
+			"saadparwaiz1/cmp_luasnip",
+		},
 		config = function()
-			require("coq_3p")({
-				{ src = "nvimlua", short_name = "nLUA" },
-			})
-		end,
+			require("cfg.cmp")
+		end
 	})
 	use({
 		"windwp/nvim-autopairs",
