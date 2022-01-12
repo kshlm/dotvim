@@ -141,7 +141,7 @@ local function load(use)
 		end,
 	})
 
-	-- Others
+	-- Completions
 	use({
 		"hrsh7th/nvim-cmp",
 		requires = {
@@ -154,6 +154,13 @@ local function load(use)
 		},
 		config = function()
 			require("cfg.cmp")
+		end
+	})
+	use({
+		"L3MON4D3/LuaSnip",
+		requires = "rafamadriz/friendly-snippets",
+		config = function ()
+			require("luasnip.loaders.from_vscode").load()
 		end
 	})
 	use({
