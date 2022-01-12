@@ -1,4 +1,5 @@
 local cmp = require("cmp")
+local lspkind = require("lspkind")
 local luasnip = require("luasnip")
 
 local has_words_before = function()
@@ -7,10 +8,8 @@ local has_words_before = function()
 end
 
 cmp.setup({
-	snippet = {
-		expand = function(args)
-			luasnip.lsp_expand(args.body)
-		end,
+	formatting = {
+		format = lspkind.cmp_format(),
 	},
 	mapping = {
 		["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
@@ -44,18 +43,28 @@ cmp.setup({
 			end
 		end, { "i", "s" }),
 	},
+	snippet = {
+		expand = function(args)
+			luasnip.lsp_expand(args.body)
+		end,
+	},
 	sources = cmp.config.sources({
 		{ name = "nvim_lsp" },
 		{ name = "luasnip" },
+		{ name = "path" },
+		{ name = "nvim_lua" },
 	}, {
 		{ name = "buffer" },
 	}),
+	experimental = { ghost_text = true },
 })
 
 cmp.setup.cmdline("/", {
-	sources = {
+	sources = cmp.config.sources({
+		{ name = "nvim_lsp_document_symbol" },
+	}, {
 		{ name = "buffer" },
-	},
+	}),
 })
 
 cmp.setup.cmdline(":", {
