@@ -158,7 +158,7 @@ local function load(use)
 	})
 	use({
 		"windwp/nvim-autopairs",
-		requires = "ms-jpq/coq_nvim",
+		requires = "hrsh7th/nvim-cmp",
 		config = function()
 			require("cfg.autopairs")
 		end,
