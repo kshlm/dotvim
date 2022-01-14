@@ -43,6 +43,7 @@ local function load(use)
 			"kyazdani42/nvim-web-devicons",
 			"nvim-lua/popup.nvim",
 			"nvim-lua/plenary.nvim",
+			{'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 		},
 		config = function()
 			require("cfg.telescope")
@@ -98,7 +99,7 @@ local function load(use)
 		"williamboman/nvim-lsp-installer",
 		config = function()
 			require("cfg.lspinstaller")
-		end
+		end,
 	})
 	use("tami5/lspsaga.nvim")
 	use({
@@ -156,14 +157,14 @@ local function load(use)
 		},
 		config = function()
 			require("cfg.cmp")
-		end
+		end,
 	})
 	use({
 		"L3MON4D3/LuaSnip",
 		requires = "rafamadriz/friendly-snippets",
-		config = function ()
+		config = function()
 			require("luasnip.loaders.from_vscode").load()
-		end
+		end,
 	})
 	use({
 		"windwp/nvim-autopairs",

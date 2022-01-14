@@ -2,14 +2,27 @@ local telescope = require("telescope")
 local builtin = require("telescope.builtin")
 local mapx = require("mapx")
 
-local cfg = {
+local defaults = {
 	color_devicons = true,
 	layout_strategy = "flex",
-	path_display = { "shorten" },
+	path_display = { "smart" },
 	scroll_strategy = "cycle",
 	sorting_strategy = "ascending",
 }
-telescope.setup({ defaults = cfg })
+local extensions = {
+	fzf = {
+		fuzzy = true,
+		override_generic_sorter = true,
+		override_file_sorter = true,
+		case_mode = "smart_case",
+	},
+}
+telescope.setup({
+	defaults = defaults,
+	extensions = extensions,
+})
+
+telescope.load_extension("fzf")
 
 mapx.group({ silent = true }, function()
 	mapx.nnoremap("<C-p>", function() builtin.find_files() end)
