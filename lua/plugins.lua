@@ -43,7 +43,7 @@ local function load(use)
 			"kyazdani42/nvim-web-devicons",
 			"nvim-lua/popup.nvim",
 			"nvim-lua/plenary.nvim",
-			{'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+			{ "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
 		},
 		config = function()
 			require("cfg.telescope")
@@ -193,6 +193,19 @@ local function load(use)
 		ft = { "go", "go.mod" },
 		config = function()
 			require("cfg.go")
+		end,
+	})
+
+	-- Other dev plugins
+	use({
+		"pwntester/octo.nvim",
+		requires = {
+			"nvim-lua/plenary.nvim",
+			"nvim-telescope/telescope.nvim",
+			"kyazdani42/nvim-web-devicons",
+		},
+		config = function()
+			require("octo").setup()
 		end,
 	})
 end
