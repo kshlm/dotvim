@@ -53,8 +53,6 @@ cmp.setup({
 		{ name = "luasnip" },
 		{ name = "path" },
 		{ name = "nvim_lua" },
-	}, {
-		{ name = "buffer" },
 	}),
 	experimental = { ghost_text = true },
 })
