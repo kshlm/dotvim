@@ -2,8 +2,9 @@
 require("nvim-treesitter.configs").setup({
 	autopairs = { enable = true },
 	autotag = { enable = true },
-	ensure_installed = "maintained",
+	ensure_installed = "all",
 	highlight = { enable = true },
+	ignore_install = {"phpdoc"},
 	incremental_selection = { enable = true },
 	indent = { enable = true },
 	refactor = {

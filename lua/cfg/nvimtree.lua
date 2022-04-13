@@ -3,20 +3,28 @@ local mapx = require("mapx")
 
 vim.cmd([[ highlight link NvimTreeFolderName Title ]])
 vim.cmd([[ highlight link NvimTreeFolderIcon Tag ]])
+vim.cmd([[ autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif ]])
 
 vim.g.nvim_tree_add_trailing = 1
 vim.g.nvim_tree_git_hl = 1
 vim.g.nvim_tree_group_empty = 1
-vim.g.nvim_tree_indent_markers = 1
-vim.g.nvim_tree_quit_on_open = 1
 
 nvimtree.setup {
-	auto_close = true,
+	actions = {
+		open_file = {
+			quit_on_open = true
+		},
+	},
 	diagnostics = {
 		enabled = true
 	},
 	git = {
 		ignore = true
+	},
+	renderer = {
+		indent_markers = {
+			enable = true
+		},
 	},
 	update_focused_file = {
 		enabled = true,
