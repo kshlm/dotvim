@@ -14,7 +14,6 @@ local function setup_servers()
 						shadow = true,
 						unusedparams = true,
 					},
-					gofumpt = true,
 					staticcheck = true,
 					usePlaceholders = true,
 				},

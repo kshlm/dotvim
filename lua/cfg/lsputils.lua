@@ -60,7 +60,7 @@ M.make_config = function(config)
 	}
 	config = vim.tbl_extend("error", {
 		capabilities = cmp.update_capabilities(capabilities),
-		on_attach = on_attach,
+		-- on_attach = on_attach,
 	}, config)
 	return config
 end

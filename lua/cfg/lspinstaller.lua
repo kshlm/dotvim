@@ -25,6 +25,6 @@ local configs = {
 		},
 	},
 }
-lspinstaller.on_server_ready(function(server)
+--[[ lspinstaller.on_server_ready(function(server)
 	server:setup(lsputils.make_config(configs[server.name] or {}))
-end)
+end) ]]

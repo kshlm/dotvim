@@ -56,6 +56,7 @@ local function load(use)
 			require("gitsigns").setup()
 		end,
 	})
+	use("folke/lsp-colors.nvim")
 
 	-- Utility plugins
 	use("b3nj5m1n/kommentary")
@@ -91,6 +92,15 @@ local function load(use)
 		"JoosepAlviste/nvim-ts-context-commentstring",
 		requires = "nvim-treesitter/nvim-treesitter",
 	})
+	use({
+		"lukas-reineke/indent-blankline.nvim",
+		requires = "nvim-treesitter/nvim-treesitter",
+		config = function()
+			require ("indent_blankline").setup({
+				show_current_context = true,
+			})
+		end
+	})
 	-- Polyglot for everything else
 	use("sheerun/vim-polyglot")
 
@@ -101,7 +111,6 @@ local function load(use)
 			require("cfg.lspinstaller")
 		end,
 	})
-	use("tami5/lspsaga.nvim")
 	use({
 		"neovim/nvim-lspconfig",
 		requires = {
@@ -109,9 +118,6 @@ local function load(use)
 			"tami5/lspsaga.nvim",
 			"hrsh7th/cmp-nvim-lsp",
 		},
-		config = function()
-			require("cfg.lsp")
-		end,
 	})
 	use({
 		"onsails/lspkind-nvim",
@@ -120,11 +126,11 @@ local function load(use)
 			require("lspkind").init()
 		end,
 	})
-	use({
+	--[[ use({
 		"simrat39/symbols-outline.nvim",
 		requires = "neovim/nvim-lspconfig",
-	})
-	use({
+	}) ]]
+	--[[ use({
 		"jose-elias-alvarez/null-ls.nvim",
 		requires = {
 			"neovim/nvim-lspconfig",
@@ -133,12 +139,23 @@ local function load(use)
 		config = function()
 			require("cfg.null-ls")
 		end,
-	})
-	use({
+	}) ]]
+	--[[ use({
 		"folke/trouble.nvim",
 		requires = "neovim/nvim-lspconfig",
 		config = function()
 			require("cfg.trouble")
+		end,
+	}) ]]
+	use({
+		"ray-x/navigator.lua",
+		requires = {
+			"neovim/nvim-lspconfig",
+			{"ray-x/guihua.lua", run = "cd lua/fzy && make"},
+			"ray-x/lsp_signature.nvim",
+		},
+		config = function()
+			require("cfg.navigator")
 		end,
 	})
 
@@ -195,6 +212,7 @@ local function load(use)
 			require("cfg.go")
 		end,
 	})
+	use("folke/lua-dev.nvim")
 
 	-- Other dev plugins
 	use({

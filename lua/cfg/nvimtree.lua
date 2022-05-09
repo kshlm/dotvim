@@ -10,28 +10,22 @@ vim.g.nvim_tree_git_hl = 1
 vim.g.nvim_tree_group_empty = 1
 
 nvimtree.setup {
-	actions = {
-		open_file = {
-			quit_on_open = true
-		},
-	},
 	diagnostics = {
-		enabled = true
+		enable = true,
 	},
 	git = {
-		ignore = true
+		ignore = true,
 	},
+	hijack_cursor = true,
+	open_on_setup = true,
 	renderer = {
 		indent_markers = {
 			enable = true
 		},
 	},
 	update_focused_file = {
-		enabled = true,
-	},
-	update_to_buf_dir = {
-		enabled = true,
-		auto_open = true,
+		enable = true,
+		update_cwd = true,
 	},
 }
 
