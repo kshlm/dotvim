@@ -20,7 +20,7 @@ local function load(use)
 		end,
 	})
 	use({
-		"hoob3rt/lualine.nvim",
+		"nvim-lualine/lualine.nvim",
 		requires = { "kyazdani42/nvim-web-devicons" },
 		config = function()
 			require("cfg.lualine")("dracula")
@@ -157,6 +157,12 @@ local function load(use)
 		config = function()
 			require("cfg.navigator")
 		end,
+	})
+	use({
+		"j-hui/fidget.nvim",
+		config = function()
+			require("fidget").setup()
+		end
 	})
 
 	-- Completions
