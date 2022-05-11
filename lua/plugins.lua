@@ -1,6 +1,6 @@
 local function load(use)
 	use({ "wbthomason/packer.nvim", opt = true })
-
+	use("lewis6991/impatient.nvim")
 	-- Some helpers
 	use("svermeulen/vimpeccable")
 	use("b0o/mapx.lua")

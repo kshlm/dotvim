@@ -1,4 +1,5 @@
 require("bootstrap")
+require("impatient").enable_profile()
 require("plugins")()
 
 local vimp = require("vimp")
