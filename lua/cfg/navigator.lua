@@ -1,6 +1,7 @@
 local navigator = require("navigator")
 
 navigator.setup({
+	debug = false,
 	icons = {
 		code_action_icon = "",
 		code_lens_action_icon = "",
@@ -10,9 +11,9 @@ navigator.setup({
 		diagnostic_hint = "",
 		diagnostic_virtual_text = " ",
 		diagnostic_head_severity_1 = "",
-    diagnostic_head_severity_2 = "",
-    diagnostic_head_severity_3 = "",
-    diagnostic_head_description = " ",
+		diagnostic_head_severity_2 = "",
+		diagnostic_head_severity_3 = "",
+		diagnostic_head_description = " ",
 		diagnostic_head = "",
 		diagnostic_file = "",
 
@@ -30,6 +31,6 @@ navigator.setup({
 	lsp = {
 		code_action = { virtual_text = false },
 		code_lens_action = { virtual_text = false },
+		disable_format_cap = {"sumneko_lua"},
 	},
-	lsp_installer = true,
 })

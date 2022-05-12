@@ -108,16 +108,20 @@ local function load(use)
 	use({
 		"williamboman/nvim-lsp-installer",
 		config = function()
-			require("cfg.lspinstaller")
+			require("nvim-lsp-installer").setup({
+				automatic_installation = true,
+			})
 		end,
 	})
 	use({
 		"neovim/nvim-lspconfig",
 		requires = {
 			"williamboman/nvim-lsp-installer",
-			"tami5/lspsaga.nvim",
 			"hrsh7th/cmp-nvim-lsp",
 		},
+		--[[ config = function()
+			require("cfg.lsp")
+		end, ]]
 	})
 	use({
 		"onsails/lspkind-nvim",
@@ -130,7 +134,7 @@ local function load(use)
 		"simrat39/symbols-outline.nvim",
 		requires = "neovim/nvim-lspconfig",
 	}) ]]
-	--[[ use({
+	use({
 		"jose-elias-alvarez/null-ls.nvim",
 		requires = {
 			"neovim/nvim-lspconfig",
@@ -139,7 +143,7 @@ local function load(use)
 		config = function()
 			require("cfg.null-ls")
 		end,
-	}) ]]
+	})
 	--[[ use({
 		"folke/trouble.nvim",
 		requires = "neovim/nvim-lspconfig",
@@ -150,6 +154,7 @@ local function load(use)
 	use({
 		"ray-x/navigator.lua",
 		requires = {
+			"williamboman/nvim-lsp-installer",
 			"neovim/nvim-lspconfig",
 			{"ray-x/guihua.lua", run = "cd lua/fzy && make"},
 			"ray-x/lsp_signature.nvim",

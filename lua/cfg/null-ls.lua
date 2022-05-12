@@ -7,6 +7,7 @@ local sources = {
 	-- null_ls.builtins.diagnostics.editorconfig_checker,
 	-- null_ls.builtins.diagnostics.selene,
 	null_ls.builtins.diagnostics.shellcheck,
+	null_ls.builtins.diagnostics.golangci_lint,
 
 	-- Formatting
 	null_ls.builtins.formatting.black,
@@ -25,4 +26,4 @@ local sources = {
 	-- null_ls.builtins.code_actions.gitsigns
 }
 
-null_ls.setup(lsputils.make_config({ sources = sources }))
+null_ls.setup({ sources = sources })
