@@ -5,10 +5,6 @@ vim.cmd([[ highlight link NvimTreeFolderName Title ]])
 vim.cmd([[ highlight link NvimTreeFolderIcon Tag ]])
 vim.cmd([[ autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif ]])
 
-vim.g.nvim_tree_add_trailing = 1
-vim.g.nvim_tree_git_hl = 1
-vim.g.nvim_tree_group_empty = 1
-
 nvimtree.setup {
 	diagnostics = {
 		enable = true,
@@ -19,6 +15,10 @@ nvimtree.setup {
 	hijack_cursor = true,
 	open_on_setup = true,
 	renderer = {
+		add_trailing = true,
+		group_empty = true,
+		highlight_git = true,
+		highlight_opened_files = 3,
 		indent_markers = {
 			enable = true
 		},

@@ -33,4 +33,5 @@ navigator.setup({
 		code_lens_action = { virtual_text = false },
 		disable_format_cap = {"sumneko_lua"},
 	},
+	lsp_installer = true,
 })
