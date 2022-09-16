@@ -105,18 +105,19 @@ local function load(use)
 	use("sheerun/vim-polyglot")
 
 	-- LSP things
+	use("williamboman/mason.nvim")
 	use({
-		"williamboman/nvim-lsp-installer",
+		"williamboman/mason-lspconfig.nvim",
 		config = function()
-			require("nvim-lsp-installer").setup({
-				automatic_installation = true,
-			})
+			require("mason").setup()
+			require("mason-lspconfig").setup({})
 		end,
 	})
 	use({
 		"neovim/nvim-lspconfig",
 		requires = {
-			"williamboman/nvim-lsp-installer",
+			"williamboman/mason.nvim",
+			"williamboman/mason-lspconfig.nvim",
 			"hrsh7th/cmp-nvim-lsp",
 		},
 		--[[ config = function()
@@ -154,7 +155,7 @@ local function load(use)
 	use({
 		"ray-x/navigator.lua",
 		requires = {
-			"williamboman/nvim-lsp-installer",
+			"williamboman/mason.nvim",
 			"neovim/nvim-lspconfig",
 			{"ray-x/guihua.lua", run = "cd lua/fzy && make"},
 			"ray-x/lsp_signature.nvim",

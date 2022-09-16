@@ -1,7 +1,7 @@
 local navigator = require("navigator")
 
 navigator.setup({
-	debug = false,
+	debug = true,
 	icons = {
 		code_action_icon = "",
 		code_lens_action_icon = "",
@@ -28,10 +28,10 @@ navigator.setup({
 			field = "ﰠ",
 		},
 	},
+	mason = true,
 	lsp = {
 		code_action = { virtual_text = false },
 		code_lens_action = { virtual_text = false },
 		disable_format_cap = {"sumneko_lua"},
 	},
-	lsp_installer = true,
 })
